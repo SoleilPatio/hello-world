@@ -1,0 +1,4 @@
+sYmbol.delete
+d.load.elf "C:\PROJECT\IMAGE\Amethyst\0407-2\Debug_Files\vmlinux" /nocode /noclear /strippart 8
+;d.load.elf  "H:\zarakk_branch\vmlinux"  /strippart 5
+y.sourcepath.setbasedir U:\sdb-android-4.4-eos\android\kernel
