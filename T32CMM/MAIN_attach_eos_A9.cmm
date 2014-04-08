@@ -1,0 +1,30 @@
+SYStem.CPU CortexA9MPCore
+SYStem.CONFIG CoreNumber 2
+SYStem.JTAGCLOCK 10MHz
+SYStem.CONFIG COREBASE apb:0x80030000 0x80032000
+CORE.ASSIGN 1
+THREAD.ASSIGN 1 2
+
+SYStem.CPUACCESS enable
+BREAK.SELECT PROGRAM ONCHIP
+SYStem.Option PWRDWN ON
+
+SYStem.Option DACR ON          ; give Debugger global write permissions
+SYStem.Option ResBreak Off     ; board specific, see documentation
+TrOnchip.Set DABORT OFF        ; used by Linux for page miss!
+TrOnchip.Set PABORT OFF        ; used by Linux for page miss!
+TrOnchip.Set UNDEF OFF         ; my be used by Linux for FPU detection
+sYmbol.Delete                  ; delete all symbols
+
+SETUP.IMASKASM ON              ; lock interrupts while single stepping
+SYStem.Mode.ATTACH
+
+;do C:\T32\scripts\setup_window.cmm
+
+;b.s 0xc00223a8
+
+break
+
+;do cls cmm
+do load_linux_symbol.cmm
+do menu_linux.cmm
