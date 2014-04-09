@@ -1,7 +1,10 @@
 SYStem.CPU CortexA9MPCore
 SYStem.CONFIG CoreNumber 2
-SYStem.JTAGCLOCK 10MHz
-SYStem.CONFIG COREBASE apb:0x80030000 0x80032000
+SYStem.JTAGCLOCK 20MHz
+SYStem.CONFIG COREBASE apb:0x80030000 0x80032000  ;use this after boot into linux to support breakpoint at C1
+;SYStem.CONFIG COREBASE apb:0x80030000    ;use this to breakpoint at the rome code, but cannot stop at C1
+
+
 CORE.ASSIGN 1
 THREAD.ASSIGN 1 2
 
@@ -28,3 +31,19 @@ break
 ;do cls cmm
 do load_linux_symbol.cmm
 do menu_linux.cmm
+
+b.s start_kernel
+;b.s hyp_mode_check
+;b.s init_idle_bootup_task
+b.s sched_init_smp
+b.s sh_mobile_lcdc_probe
+
+
+GO
+WAIT !run()
+
+
+
+
+
+

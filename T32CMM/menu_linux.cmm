@@ -1,5 +1,5 @@
 global &t32_install_dir
 &t32_install_dir=os.psd()
 &t32_install_dir=string.lwr("&t32_install_dir")
-MENU.ReProgram "&t32_install_dir"\demo\arm\kernel\linux\linux.men"
+MENU.ReProgram "&t32_install_dir"\demo\arm\kernel\linux\linux-3.x\linux.men"
 task.config "&t32_install_dir"\demo\arm\kernel\linux\linux-3.x\linux3.t32"
