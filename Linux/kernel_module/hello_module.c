@@ -8,13 +8,17 @@ MODULE_DESCRIPTION("A Simple Hello World module");
 
 static int __init hello_init(void)
 {
-        printk(KERN_INFO "Hello world!\n");
-            return 0;    // Non-zero return means that the module couldn't be loaded.
+    int i=10;
+    while(i--)
+        printk(KERN_EMERG "[CLS] Hello world!\n");
+    return 0;    // Non-zero return means that the module couldn't be loaded.
 }
 
 static void __exit hello_cleanup(void)
 {
-        printk(KERN_INFO "Cleaning up module.\n");
+    int i=10;
+    while(i--)
+        printk(KERN_EMERG "[CLS] Cleaning up module.\n");
 }
 
 module_init(hello_init);
