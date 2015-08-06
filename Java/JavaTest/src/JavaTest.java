@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Calendar;
 
 
@@ -7,13 +8,19 @@ public class JavaTest {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		System.out.printf("JavaTest\n");
 		
 		JavaTest javatest = new JavaTest();
 		
 		javatest.calendartest();
+		
+		/*******************************************/
+		JacksonTest jacksonTest = new JacksonTest();
+		
+		jacksonTest.run();
+		
 
 	}
 	
