@@ -6,6 +6,7 @@ public class Main
 		
 		pMain.test1();
 		pMain.test2();
+		pMain.test3();
 	}
 
 	public void test1() 
@@ -48,6 +49,15 @@ public class Main
 		A pA = new B();
 		B pB = (B)pA;
 	}
+	
+	public void test3()
+	{
+		A pA = new D();
+		
+		pA.doSomething((String)"HAHA");
+	}
+	
+	
 	
 	
 

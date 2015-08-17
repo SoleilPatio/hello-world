@@ -10,5 +10,10 @@ public class A
 	{
 		System.out.printf("Action - A\n");
 	}
+	
+	public void doSomething( String str )
+	{
+		System.out.println("A:" + str);
+	}
 
 }
