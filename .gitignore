@@ -1,13 +1,18 @@
+*.swp
+
+#[cscope symbol]
 cscope.*
 tags
 gtags.files
+
+#[kernel module]
 Module.symvers
 modules.order
 *.mod.c
 *.o
 *.ko
-/JavaNetBeansHello/nbproject/private/
-/JavaNetBeansHello/build/
-/JavaJdbcHello/nbproject/private/
-/JavaJdbcHello/build/
-/JavaJdbcHello/dist/
+*.ko.cmd
+*.o.cmd
+*.mod.o.cmd
+.tmp_versions
+
