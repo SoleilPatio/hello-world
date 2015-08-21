@@ -5,23 +5,26 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.cloudslee.util.Debug;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-public class App 
+public class MainJackson 
 {
     public static void main( String[] args ) throws IOException
     {
         System.out.println( "Jackson Test" );
         
-        App app = new App();
+        MainJackson app = new MainJackson();
         
-        app.singleTest();
+//        app.singleTest();
+//        
+//        app.arrayTest();
+//        
+//        app.listTest();
         
-        app.arrayTest();
-        
-        app.listTest();
+        app.mapTest();
         
     }
     
@@ -74,6 +77,20 @@ public class App
 	
 		/*Write*/
 		mapper.writeValue(new File("rsc/data_out_list.json"), value_list);
+		
+	}
+    
+    void mapTest() throws IOException
+	{
+		ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+		/*Read*/
+		Map<String, String> map = mapper.readValue(new File("rsc/data_in_map.json"), 
+													new TypeReference<Map<String, String>>(){});
+
+		Debug.printMap(map);
+	
+		/*Write*/
+		mapper.writeValue(new File("rsc/data_out_map.json"), map);
 		
 	}
 }
