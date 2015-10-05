@@ -1,0 +1,1 @@
+/home/soleilpl/linux-env/tools/gadget/build-symbol-ubuntu-ko.sh
