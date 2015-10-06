@@ -81,6 +81,7 @@ public class AppTest
 		for (Field element : clazz.getFields()) {
 			System.out.println("------");
 			System.out.println("field name :" + element.getName());
+			System.out.println("field Class is Primitive :" + element.getClass().isPrimitive());
 			System.out.println("field type :" + element.getType().getName());
 			System.out.println("field value :" + element.get(tc));//com.cloudslee.rutile.db_fields.Stockinfo@7006c658??!!
 			
@@ -104,10 +105,11 @@ public class AppTest
 				for (Field element_l2 : clazz_l2.getFields()) {
 					System.out.println("------");
 					System.out.println("\tfield name :" + element_l2.getName());
+					System.out.println("\tfield Class is Primitive :" + element_l2.getClass().isPrimitive());
 					System.out.println("\tfield type :" + element_l2.getType().getName());
-					System.out.println("\tfield value :" + element_l2.get(/*element.get(tc)*/tc.body())); //傳入實體
+					System.out.println("\tfield value :" + element_l2.get(element.get(tc)/*tc.body()*/)); //傳入實體
 					if(element_l2.get(element.get(tc)/*tc.body()*/) != null){
-						System.out.println("\tfield Object Class Name :" + element_l2.get(/*element.get(tc)*/tc.body()).getClass().getName());
+						System.out.println("\tfield Object Class Name :" + element_l2.get(element.get(tc)/*tc.body()*/).getClass().getName());
 					}
 				}
 				
