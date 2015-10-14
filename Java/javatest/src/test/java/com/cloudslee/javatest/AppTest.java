@@ -3,6 +3,10 @@ package com.cloudslee.javatest;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import com.cloudslee.javatest.testGenericClass.TestDerivativeFromAbstract;
+import com.cloudslee.javatest.testGenericClass.TestDerivativeFromClass;
+import com.cloudslee.javatest.testGenericClass.TestGenericAbstract;
+import com.cloudslee.javatest.testGenericClass.TestGenericClass;
 import com.cloudslee.rutile.db_fields.StockRecord;
 import com.cloudslee.rutile.db_fields.Stockinfo;
 import com.cloudslee.util.Datecode;
@@ -39,6 +43,29 @@ public class AppTest
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 */
+	public void testGenericClass()
+	{
+		/*
+		 * 這方法只能抓SuperClass的GenericType,所以GenericType物件必須被繼承後才能用
+		 */
+		System.out.println("OK: new a Interface ( a anonymous derivatived object)");
+		TestGenericAbstract<Integer> objTGA = new TestGenericAbstract<Integer>(){};
+		
+		System.out.println("OK: new a anonymous derivateved object");
+		TestGenericClass<Integer> objTGCC = new TestGenericClass<Integer>(){};
+		
+		System.out.println("Failed: new a Object");
+		TestGenericClass<Integer> objTGCO = new TestGenericClass<Integer>();
+		
+		System.out.println("OK: new a Derivatived Object");
+		TestDerivativeFromClass objTDFC = new TestDerivativeFromClass();
+		
+		System.out.println("OK: new a Derivatived Abstract Object ==> suggest this usage");
+		TestDerivativeFromAbstract objTDFA = new TestDerivativeFromAbstract();
+		
+		
+	}
+	
 	public void testClassClass() throws IllegalArgumentException, IllegalAccessException {
 		TestClass tc = new TestClass();
 		Class<?> clazz = tc.getClass();
