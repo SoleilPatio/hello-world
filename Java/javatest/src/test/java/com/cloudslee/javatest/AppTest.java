@@ -7,6 +7,7 @@ import com.cloudslee.javatest.testGenericClass.TestDerivativeFromAbstract;
 import com.cloudslee.javatest.testGenericClass.TestDerivativeFromClass;
 import com.cloudslee.javatest.testGenericClass.TestGenericAbstract;
 import com.cloudslee.javatest.testGenericClass.TestGenericClass;
+import com.cloudslee.rutile.db_fields.SrStockinfo;
 import com.cloudslee.rutile.db_fields.StockRecord;
 import com.cloudslee.rutile.db_fields.Stockinfo;
 import com.cloudslee.util.Datecode;
@@ -43,6 +44,16 @@ public class AppTest
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 */
+	public void testStockRecord()
+	{
+		SrStockinfo sti = new SrStockinfo();
+		
+		sti.body.name = "聯發科";
+		
+		System.out.println(sti);
+	}
+	
+	@SuppressWarnings("unused")
 	public void testGenericClass()
 	{
 		/*
@@ -89,12 +100,13 @@ public class AppTest
 	}
 	
 	public void testClassPOJO() throws IllegalArgumentException, IllegalAccessException {
-		StockRecord<Stockinfo> tc = new StockRecord<Stockinfo>(Stockinfo.class);
+		SrStockinfo tc = new SrStockinfo();
 		// TestClass tc = new TestClass();
-		Class<StockRecord<Stockinfo>> clazz = (Class<StockRecord<Stockinfo>>) tc.getClass();
+		@SuppressWarnings("unchecked")
+		Class<SrStockinfo> clazz = (Class<SrStockinfo>) tc.getClass();
 		tc.code = "2454";
-		tc.body().name = "聯發科";
-		tc.body().list_date = 20150930;
+		tc.getBody().name = "聯發科";
+		tc.getBody().list_date = 20150930;
 
 		System.out.println("tc.getClass() = " + tc.getClass());
 		System.out.println("clazz.getName() = " + clazz.getName());
@@ -147,19 +159,20 @@ public class AppTest
 		/**
 		 * 
 		 */
-		Class body_clazz =  tc.body().getClass();
+		Class<? extends Stockinfo> body_clazz =  tc.getBody().getClass();
 		
 		System.out.println(body_clazz); //class com.cloudslee.rutile.db_fields.Stockinfo
 		
 	}
 
 	public void testClassPOJO_TEST() throws IllegalArgumentException, IllegalAccessException {
-		StockRecord<Stockinfo> tc = new StockRecord<Stockinfo>(Stockinfo.class);
+		SrStockinfo tc = new SrStockinfo();
 		// TestClass tc = new TestClass();
-		Class<StockRecord<Stockinfo>> clazz = (Class<StockRecord<Stockinfo>>) tc.getClass();
+		@SuppressWarnings("unchecked")
+		Class<SrStockinfo> clazz = (Class<SrStockinfo>) tc.getClass();
 		tc.code = "2454";
-		tc.body().name = "聯發科";
-		tc.body().list_date = 20150930;
+		tc.getBody().name = "聯發科";
+		tc.getBody().list_date = 20150930;
 
 		System.out.println("tc.getClass() = " + tc.getClass());
 		System.out.println("clazz.getName() = " + clazz.getName());
@@ -197,9 +210,9 @@ public class AppTest
 					System.out.println("------");
 					System.out.println("\tfield name :" + element_l2.getName());
 					System.out.println("\tfield type :" + element_l2.getType().getName());
-					System.out.println("\tfield value :" + element_l2.get(/*element.get(tc)*/tc.body())); //傳入實體
+					System.out.println("\tfield value :" + element_l2.get(/*element.get(tc)*/tc.getBody())); //傳入實體
 					if(element_l2.get(element.get(tc)/*tc.body()*/) != null){
-						System.out.println("\tfield Object Class Name :" + element_l2.get(/*element.get(tc)*/tc.body()).getClass().getName());
+						System.out.println("\tfield Object Class Name :" + element_l2.get(/*element.get(tc)*/tc.getBody()).getClass().getName());
 					}
 				}
 				
@@ -210,7 +223,7 @@ public class AppTest
 		/**
 		 * 
 		 */
-		Class body_clazz =  tc.body().getClass();
+		Class<? extends Stockinfo> body_clazz =  tc.getBody().getClass();
 		
 		System.out.println(body_clazz); //class com.cloudslee.rutile.db_fields.Stockinfo
 		
