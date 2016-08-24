@@ -1,7 +1,10 @@
 sYmbol.delete
 
 
-d.load.elf ""M:\mfs-gitmtk\alps-mp-m1.mp3\out\target\product\k57v1_om_lwctg_lm\obj\KERNEL_OBJ\vmlinux"" /strippart 4
+d.load.elf "M:\mfs-gitmtk\alps-mp-m1.mp3\out\target\product\k57v1_op02\obj\KERNEL_OBJ\vmlinux" /strippart 4
+
+;d.load.elf "M:\mfs-gitmtk\alps-mp-m1.mp3\out\target\product\k57v1_om_lwctg_lm\obj\KERNEL_OBJ\vmlinux" /strippart 4
+
 
 ;d.load.elf ""M:\mfs-gitmtk\alps-mp-m1.mp3\out\target\product\k57v1_om_lwctg_lm\obj\KERNEL_OBJ\vmlinux"" /nocode /noclear /strippart 8
 ;d.load.elf  "H:\zarakk_branch\vmlinux"  /strippart 5
@@ -9,4 +12,5 @@ d.load.elf ""M:\mfs-gitmtk\alps-mp-m1.mp3\out\target\product\k57v1_om_lwctg_lm\o
 
 y.sourcepath.setbasedir "M:\"
 
-Y.L.SOURCE
+;Y.L.SOURCE
+d.l
