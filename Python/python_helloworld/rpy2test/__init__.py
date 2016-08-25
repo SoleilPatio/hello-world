@@ -1,16 +1,9 @@
 import math
 
-import rpy2
-print(rpy2.__version__)
 
-from rpy2.rinterface import R_VERSION_BUILD
-print(R_VERSION_BUILD)
 
-import rpy2.robjects.tests
-# rpy2.robjects.tests.main()
 
-import rpy2.rinterface.tests
-#rpy2.rinterface.tests.main()
+
 
 #----------------------------------------------
 
@@ -51,5 +44,4 @@ robjects.r('''
         plot(sin,-10,10)
         ''')
 
-while(1):
-    i=1
+input("ENTER")
