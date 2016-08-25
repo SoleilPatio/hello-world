@@ -18,3 +18,5 @@ modules.order
 *.mod.o.cmd
 .tmp_versions
 
+#[python]
+__pycache__
