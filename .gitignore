@@ -1,6 +1,8 @@
 *.swp
 *.tmp
 *.class
+.pydevproject
+.project
 
 #[cscope symbol]
 cscope.*
