@@ -15,7 +15,10 @@ struct client_list {
 };
 
 
-static LIST_HEAD(udmet_client_head); /*[CLS]: this declare and init the "list head", use "list head" to do operation with it*/
+static LIST_HEAD(client_head); /*[CLS]: this declare and init the "list_head", use "list_head" to do operation with it*/
+							   /* 2 kinds of init:  1.static way -> LIST_HEAD(client_head)
+							    * 					2.run-time way -> INIT_LIST_HEAD(client_head)
+							    */
 
 
 void add_new_entry(char *mod_name, MET_UDMET_POLLING_FUNC polling_func, unsigned int period_multiply)
@@ -30,7 +33,7 @@ void add_new_entry(char *mod_name, MET_UDMET_POLLING_FUNC polling_func, unsigned
 		clientPtr->period_multiply = period_multiply;
 		INIT_LIST_HEAD(&clientPtr->list); /*[CLS]: every entry has its own list_head , and need to be initialized*/
 
-		list_add(&clientPtr->list, &udmet_client_head); /*[CLS]: insert entry to list*/
+		list_add(&clientPtr->list, &client_head); /*[CLS]: insert entry to list*/
 	}
 }
 
@@ -41,7 +44,7 @@ static void traversal_list(void)
 	struct client_list *clientPtr;
 
 	/*[CLS]: Traversal list*/
-	list_for_each(iter, &udmet_client_head) { 
+	list_for_each(iter, &client_head) {
 		clientPtr = list_entry(iter, struct client_list, list);
 		clientPtr->on = 0;
 	}
