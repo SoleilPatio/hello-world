@@ -2,11 +2,15 @@
 
 @author: MTK02679
 '''
+import sys
 import unittest
 import urllib
 
-import urllib.request
-import sys
+
+if sys.version_info[0] > 2:
+    import urllib.request
+
+
 
 
 class Test(unittest.TestCase):
@@ -27,7 +31,10 @@ class Test(unittest.TestCase):
         except:
             response = urllib.request.urlopen(url)
             
-        encoding = response.headers.get_content_charset('charset')
+        if sys.version_info[0] > 2:
+            encoding = response.headers.get_content_charset('charset')
+        else:
+            encoding = response.headers.getparam("charset")
         
         print(  "encoding = " + encoding)
         

@@ -2,11 +2,18 @@
 
 @author: clouds
 '''
+
+import sys
 import unittest
 import re
-from urllib.request import urlopen
-from urllib.request import Request
-import sys
+
+if sys.version_info[0] > 2:
+    from urllib.request import urlopen
+    from urllib.request import Request
+else:
+    from urllib import urlopen
+
+
 
 from bs4 import BeautifulSoup
 
@@ -25,7 +32,12 @@ class Test(unittest.TestCase):
     def testName(self):
         url="https://tw.news.yahoo.com/"
         req = urlopen(url)
-        encoding = req.headers.get_content_charset()
+        
+        if sys.version_info[0] > 2:
+            encoding = req.headers.get_content_charset()
+        else:
+            encoding = req.headers.getparam("charset")
+            
         print("encoding = " + encoding)
         print("sys.stdin.encoding = " + sys.stdin.encoding)
         
