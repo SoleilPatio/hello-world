@@ -39,6 +39,36 @@ def reverse_str(string):
 """
 
 
+def is_permutation(string1, string2):
+    str1 = list(string1)
+    str2 = list(string2)
+    
+    str1.sort()
+    str2.sort()
+    return str1 == str2
+
+def is_permutation2(string1, string2):
+    import numpy
+    
+    str1 = list(string1)
+    str2 = list(string2)
+    
+    if( len(str1) != len(str2)):
+        return False
+    
+    char_set = numpy.zeros(256)
+    
+    for c in str1:
+        char_set[ord(c)] += 1
+        
+    for c in str2:
+        char_set[ord(c)] -= 1
+        if(char_set[ord(c)] < 0):
+            return False
+    
+    print "char_set:", char_set
+    return True
+
 
 
 
@@ -46,6 +76,8 @@ if __name__ == "__main__":
     
     print is_all_unique("abcd efgh")
     print reverse_str(list("abcdefgh")) #[CLS]: "abcd" is constant  cannot be modified, use list("abcd")
+    print is_permutation("abcd", "bcad")
+    print is_permutation2("abcd", "abc")
     
     
     print "Done"
