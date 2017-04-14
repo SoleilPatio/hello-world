@@ -70,14 +70,65 @@ def is_permutation2(string1, string2):
     return True
 
 
+"""
+1.4 Write a method to replace all spaces in a string with'%20'. You may assume that
+the string has sufficient space at the end of the string to hold the additional
+characters, and that you are given the "true" length of the string. (Note: if imple-
+menting in Java, please use a character array so that you can perform this opera-
+tion in place.)
+EXAMPLE
+Input: "Mr John Smith
+Output: "Mr%20Dohn%20Smith"
+"""
+def replace_space(string):
+    #Simulate C string
+    import numpy 
+    str_len = len(string)
+    buf_len = 3*str_len
+    str_buf = numpy.zeros(buf_len, dtype='a') #a for ascii
+    
+    print type(str_buf[0])
+    
+    for i in range(len(string)):
+        str_buf[i] = string[i]
+    print str_buf
+    #-----------------------------------------
+    #Copy string content to the end of buffer
+    for i in range(str_len):
+        str_buf[buf_len-1-str_len+1+i] = str_buf[i]
+        
+    i = 0
+    for j in range(buf_len-1-str_len+1+0, buf_len-1-str_len+1+str_len):
+        if (str_buf[j] == ' '):
+            str_buf[i] = '%'
+            str_buf[i+1] = '2'
+            str_buf[i+2] = '0'
+            i += 3
+        else:
+            str_buf[i] = str_buf[j]
+            i += 1
+            
+        str_buf[j] = '' #clear
+        
+    print str_buf
+        
+    
+    #----------------------------------------
+    #show string
+    print "".join( c for c in str_buf )
+        
+    
+    
+
+
 
 
 if __name__ == "__main__":
     
-    print is_all_unique("abcd efgh")
-    print reverse_str(list("abcdefgh")) #[CLS]: "abcd" is constant  cannot be modified, use list("abcd")
-    print is_permutation("abcd", "bcad")
-    print is_permutation2("abcd", "abc")
-    
+#     print is_all_unique("abcd efgh")
+#     print reverse_str(list("abcdefgh")) #[CLS]: "abcd" is constant  cannot be modified, use list("abcd")
+#     print is_permutation("abcd", "bcad")
+#     print is_permutation2("abcd", "abc")
+    print replace_space("I am Clouds")
     
     print "Done"
