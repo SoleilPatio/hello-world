@@ -119,21 +119,21 @@ def find_kth_last_element(head, count):
     
     
     
-def find_kth_last_element_recursive(head, count, level):
+def find_kth_last_element_recursive(head, count):
+    if head == None:
+        return 0, None
     
-    if head.m_next == None:
-        target_level = level-count+1
-        if target_level == level:
-            print head.m_data
-            
-        return target_level
-
-    target_level = find_kth_last_element_recursive(head.m_next, count, level+1)
+    (i, ret_node) = find_kth_last_element_recursive(head.m_next, count)
+    i = i+1
     
-#     print target_level, level
-    if target_level == level:
+    if i == count:
         print head.m_data
-    return target_level
+        return i , head
+        
+    return i, ret_node
+        
+    
+  
     
 
 
@@ -144,8 +144,8 @@ def main_find_kth_last_element():
     print find_kth_last_element(head, 30)
     
     print "Recursive:"
-    find_kth_last_element_recursive(head, -2, 0)
-    
+    i,ret_node = find_kth_last_element_recursive(head, 2)
+    print i, ":",ret_node.m_data
     
     
 
@@ -156,6 +156,28 @@ EXAMPLE
 Input: the node c from the linked list a->b->c->d->e
 Result: nothing is returned, but the new linked list looks like a- >b- >d->e
 """
+def delete_node(del_node):
+    if del_node == None or del_node.m_next == None:
+        return
+    
+    del_node.m_data = del_node.m_next.m_data
+    del_node.m_next = del_node.m_next.m_next
+    
+
+
+def main_del_node():
+    head = gen_test_link_list(range(30))
+    
+    i,ret_node = find_kth_last_element_recursive(head, 10)
+    print ret_node.m_data
+    
+    delete_node(ret_node)
+    
+    head.traversal()
+    
+    pass
+    
+    
 
 """
 2.4 Write code to partition a linked list around a value x, such that all nodes less than
@@ -200,7 +222,8 @@ Output: C
 if __name__ == "__main__":
 #     test_link_list()
 #     main_remove_duplicate()
-    main_find_kth_last_element()
+#     main_find_kth_last_element()
+    main_del_node()
     
     
     

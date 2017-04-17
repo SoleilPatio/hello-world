@@ -24,7 +24,17 @@ class Test(unittest.TestCase):
         pass
 
 
-    def testName(self):
+    def _change(self,x):
+        x = 100
+        
+    def testHello(self):
+        var = None
+        var2 = var
+        self._change(var2)
+        print var2
+    
+    
+    def XtestName(self):
         url = "https://tw.news.yahoo.com/"
         try:
             response = urllib.urlopen(url)
