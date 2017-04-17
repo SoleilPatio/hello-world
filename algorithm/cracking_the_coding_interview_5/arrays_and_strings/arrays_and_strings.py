@@ -81,46 +81,68 @@ Input: "Mr John Smith
 Output: "Mr%20Dohn%20Smith"
 """
 def replace_space(string):
-    #Simulate C string
-    import numpy 
+    import numpy as np
+    
+    #1) simulate c string
     str_len = len(string)
-    buf_len = 3*str_len
-    str_buf = numpy.zeros(buf_len, dtype='a') #a for ascii
+    str_buf = np.zeros(3*str_len, dtype='a')
+    str_buf[0:str_len] = list(string)
+    print "".join(str_buf)
     
-    print type(str_buf[0])
-    
-    for i in range(len(string)):
-        str_buf[i] = string[i]
-    print str_buf
-    #-----------------------------------------
-    #Copy string content to the end of buffer
-    for i in range(str_len):
-        str_buf[buf_len-1-str_len+1+i] = str_buf[i]
-        
-    i = 0
-    for j in range(buf_len-1-str_len+1+0, buf_len-1-str_len+1+str_len):
-        if (str_buf[j] == ' '):
-            str_buf[i] = '%'
-            str_buf[i+1] = '2'
-            str_buf[i+2] = '0'
-            i += 3
+    #2) 2-pass algorithm
+    result_len = 0
+    for c in str_buf:
+        if c == '':
+            break
+        if c ==' ':
+            result_len += 3 #%20
         else:
-            str_buf[i] = str_buf[j]
-            i += 1
+            result_len += 1 #other character
+    
+    #process from the end
+    str_i = str_len-1
+    loc_i = result_len-1
+    
+    while(str_i >= 0):
+        if str_buf[str_i]==' ':
+            str_buf[loc_i] = '0'
+            str_buf[loc_i-1] = '2'
+            str_buf[loc_i-2] = '%'
+            str_i -= 1
+            loc_i -= 3
+        else:
+            str_buf[loc_i] = str_buf[str_i]
+            str_i -= 1
+            loc_i -= 1
+    
+    #3)show result
+    print "".join(str_buf)
             
-        str_buf[j] = '' #clear
-        
-    print str_buf
-        
-    
-    #----------------------------------------
-    #show string
-    print "".join( c for c in str_buf )
-        
-    
-    
+            
+"""
+ 1.5 Implement a method to perform basic string compression using the counts
+of repeated characters. For example, the string aabcccccaaa would become
+a2blc5a3. If the "compressed" string would not become smaller than the original
+string, your method should return the original string.
+"""
+
+"""
+1.6 Given an image represented by an NxN matrix, where each pixel in the image is
+4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
+place?
+"""
+
+"""
+1.7 Write an algorithm such that if an element in an MxN matrix is 0, its entire row
+and column are set to 0.
+pg
+"""
 
 
+
+
+           
+    
 
 
 if __name__ == "__main__":
@@ -129,6 +151,6 @@ if __name__ == "__main__":
 #     print reverse_str(list("abcdefgh")) #[CLS]: "abcd" is constant  cannot be modified, use list("abcd")
 #     print is_permutation("abcd", "bcad")
 #     print is_permutation2("abcd", "abc")
-    print replace_space("I am Clouds")
+    print replace_space("I am Clouds ")
     
     print "Done"
