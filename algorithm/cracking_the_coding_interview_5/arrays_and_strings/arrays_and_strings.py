@@ -85,7 +85,9 @@ def replace_space(string):
     
     #1) simulate c string
     str_len = len(string)
+    """[CLS]: 'a' means ascii"""
     str_buf = np.zeros(3*str_len, dtype='a')
+    """[CLS]: fastest way to copy data, must assign range"""
     str_buf[0:str_len] = list(string)
     print "".join(str_buf)
     
@@ -125,6 +127,64 @@ of repeated characters. For example, the string aabcccccaaa would become
 a2blc5a3. If the "compressed" string would not become smaller than the original
 string, your method should return the original string.
 """
+def compress_bad(string):
+    ret=""
+    
+    count = 0
+    last_c = None
+    for c in string:
+        if last_c != c and last_c != None:
+            if count > 1:
+                """[CLS]: string concatenate cost O(n^2)"""
+                ret = ret + last_c + str(count)
+            elif count == 1:
+                ret = ret + last_c
+            count = 0
+            
+        last_c = c
+        count += 1
+        
+    if count > 1:
+        ret = ret + last_c + str(count)
+    elif count == 1:
+        ret = ret + last_c
+    
+            
+    if len(ret) < len(string):
+        return ret
+    else:
+        return string
+    
+def compress_good(string):
+    ret=[]
+    
+    count = 0
+    last_c = None
+    for c in string:
+        if last_c != c and last_c != None:
+            if count > 1:
+                """[CLS]: string concatenate cost O(n^2)"""
+                ret.append(last_c + str(count))
+            elif count == 1:
+                ret.append(last_c)
+            count = 0
+            
+        last_c = c
+        count += 1
+        
+    if count > 1:
+        ret.append(last_c + str(count))
+    elif count == 1:
+        ret.append(last_c)
+    
+            
+    if len(ret) < len(string):
+        return "".join(ret)
+    else:
+        return string    
+    
+        
+        
 
 """
 1.6 Given an image represented by an NxN matrix, where each pixel in the image is
@@ -138,19 +198,38 @@ and column are set to 0.
 pg
 """
 
+loop_count = 100
 
+def method1():
+    out_str = ''
+    for num in xrange(loop_count):
+        out_str += 'num'
+    return out_str
 
-
-           
+def method4():
+    str_list = []
+    for num in xrange(loop_count):
+        str_list.append('num')
+    return ''.join(str_list)           
     
-
+    
+def foo(arg):
+    pass
 
 if __name__ == "__main__":
+    import timeit
     
 #     print is_all_unique("abcd efgh")
 #     print reverse_str(list("abcdefgh")) #[CLS]: "abcd" is constant  cannot be modified, use list("abcd")
 #     print is_permutation("abcd", "bcad")
 #     print is_permutation2("abcd", "abc")
-    print replace_space("I am Clouds ")
+#     print replace_space("I am Clouds ")
+#     print timeit.timeit("compress_bad('aabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaa')", setup="from __main__ import compress_bad")
+#     print timeit.timeit("compress_good('aabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaa')", setup="from __main__ import compress_good")
+#     print timeit.timeit("foo('aabcccccaaa')", setup="from __main__ import foo")
+#     print compress_good('aabcccccaaa')
+    
+    print timeit.timeit("method1()", setup="from __main__ import method1")
+    print timeit.timeit("method4()", setup="from __main__ import method4")
     
     print "Done"
