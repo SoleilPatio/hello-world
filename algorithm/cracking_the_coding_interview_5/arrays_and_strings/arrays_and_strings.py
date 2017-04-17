@@ -186,6 +186,7 @@ def compress_good(string):
         
 
 """
+[REDO]
 1.6 Given an image represented by an NxN matrix, where each pixel in the image is
 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
 place?
@@ -250,8 +251,58 @@ def main_rotate_mat_90():
 """
 1.7 Write an algorithm such that if an element in an MxN matrix is 0, its entire row
 and column are set to 0.
-pg
 """
+import numpy as np
+def set_mat_zero(mat):
+    (row, col) = mat.shape
+    
+    zero_r = {}
+    zero_c = {}
+    
+    for r in range(row):
+        for c in range(col):
+            if mat[r,c] == 0:
+                zero_r[r] = 1
+                zero_c[c] = 1
+                
+    for r in zero_r.keys():
+        for c in range(col):
+            mat[r,c] = 0
+    
+    for c in zero_c.keys():
+        for r in range(row):
+            mat[r,c] = 0
+            
+
+def main_set_mat_zero():
+    mat = np.zeros((5,4))
+    mat.flat[:] = range(5*4)
+    
+    mat[4,3]=0
+    mat[2,2]=0
+    print mat
+    set_mat_zero(mat)
+    print mat
+
+
+
+"""
+1.8 Assume you have a method isSubstring which checks if one word is a substring
+of another. Given two strings, s1 and s2, write code to check If s2 is a rotation of s1
+using only one call to isSubstring (e.g., "waterbottLe" is a rotation of "erbottLewat").
+"""
+
+def isSubstring(s3,s1):
+    return True if s3.find(s1) != -1 else -1
+    
+
+def is_rotation_of(s1, s2):
+    s3 = s2 + s2
+    return isSubstring(s3,s1)
+
+
+
+
 
 
 
@@ -267,8 +318,9 @@ if __name__ == "__main__":
 #     print timeit.timeit("compress_good('aabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaa')", setup="from __main__ import compress_good")
 #     print timeit.timeit("foo('aabcccccaaa')", setup="from __main__ import foo")
 #     print compress_good('aabcccccaaa')
-    main_rotate_mat_90()
-    
+#     main_rotate_mat_90()
+#     main_set_mat_zero()
+    print is_rotation_of("waterbottLe", "erbottLewat" )
 
     
     print "Done"
