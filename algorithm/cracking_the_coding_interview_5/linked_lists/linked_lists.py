@@ -213,6 +213,31 @@ Output: C
 """
 2.7 Implement a function to check if a linked list is a palindrome
 """
+def gen_linked_list_from_list(plist):
+    head = Node(plist[0])
+    
+    for e in plist[1:]:
+        head.append(Node(e))
+
+    return head
+    
+def is_polindrome(current, head):
+    
+    if current == None:
+        return (head, True)
+    
+    (front, result) = is_polindrome(current.m_next, head)
+    if (current.m_data == front.m_data):
+        return (front.m_next, True and result)
+    else:
+        return (front.m_next, False and result)
+
+
+def main_is_polindrome():
+    head = gen_linked_list_from_list(list("abcdddcba"))
+        
+    print is_polindrome(head, head)
+    
 
 
     
@@ -223,7 +248,8 @@ if __name__ == "__main__":
 #     test_link_list()
 #     main_remove_duplicate()
 #     main_find_kth_last_element()
-    main_del_node()
+#     main_del_node()
+    main_is_polindrome()
     
     
     
