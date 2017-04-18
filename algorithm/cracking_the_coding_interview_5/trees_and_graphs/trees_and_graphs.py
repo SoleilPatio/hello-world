@@ -387,6 +387,7 @@ def main_check_is_bin_search_tree():
 	
 	
 """
+[CLS]:DO AGAIN : find up till the first left-childed parent
 4.6 Write an algorithm to find the'next'node (i.e., in-order successor) of a given node
 in a binary search tree. You may assume that each node has a link to its parent.
 """

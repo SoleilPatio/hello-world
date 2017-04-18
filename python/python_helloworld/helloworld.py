@@ -27,11 +27,71 @@ class Test(unittest.TestCase):
     def _change(self,x):
         x = 100
         
+    def isNumber(self, s):
+        import re
+        s = s.strip()
+        
+        print s,
+        
+        #"."
+        if s==".":
+            return False
+        
+        #no any digit
+        match = re.search("\d", s)
+        if match == None:
+            return False
+        
+        #1
+        match = re.match("^[+-]?\d+$", s)
+        if match:
+            return True
+        
+        #2.1
+        match = re.match("^[+-]?\d*\.\d*$", s)
+        if match:
+            return True
+        
+        #2e10
+        match = re.match("^[+-]?\d+\.?\d*e[+-]?\d+$", s)
+        if match:
+            return True
+        
+        #.21e81
+        match = re.match("^([+-]?\d*)\.(\d*)e([+-]?\d+)$", s)
+        if match:
+            print match.groups()
+            if match.group(1)=="" and match.group(2)=="":
+                return False
+            if match.group(3)=="":
+                return False
+                
+            return True
+        
+        return False
+       
+        
+        
+        
+        
+        
+        
     def testHello(self):
-        var = None
-        var2 = var
-        self._change(var2)
-        print var2
+        import re
+        print self.isNumber("0")
+        print self.isNumber(" 0.1")
+        print self.isNumber("abc")
+        print self.isNumber("1 a")
+        print self.isNumber("2e10")
+        print self.isNumber("e")
+        print self.isNumber(".1")
+        print self.isNumber("-1.")
+        print self.isNumber("-.")
+        print self.isNumber(".2e81")
+        print self.isNumber(".e1")
+        
+        match = re.match(".(\d)", ".111")
+        print "-->", match.group() if match else None
     
     
     def XtestName(self):
