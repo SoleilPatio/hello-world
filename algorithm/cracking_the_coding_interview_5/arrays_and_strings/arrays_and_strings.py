@@ -87,7 +87,7 @@ def replace_space(string):
     str_len = len(string)
     """[CLS]: 'a' means ascii"""
     str_buf = np.zeros(3*str_len, dtype='a')
-    """[CLS]: fastest way to copy data, must assign range"""
+    """[CLS]: fastest way to copy data, must assign range, or it will repeat"""
     str_buf[0:str_len] = list(string)
     print "".join(str_buf)
     
@@ -163,7 +163,6 @@ def compress_good(string):
     for c in string:
         if last_c != c and last_c != None:
             if count > 1:
-                """[CLS]: string concatenate cost O(n^2)"""
                 ret.append(last_c + str(count))
             elif count == 1:
                 ret.append(last_c)
@@ -191,6 +190,62 @@ def compress_good(string):
 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
 place?
 """
+import numpy as np
+
+def _rotate(mat,r,c, dim):
+    no1 = mat[r,c]
+    
+    new_r = c
+    new_c = dim - r - 1
+    #1
+    mat[r,c] = mat[new_r,new_c]
+    
+    r=new_r
+    c=new_c
+    new_r = c
+    new_c = dim - r - 1
+    #2
+    mat[r,c] = mat[new_r,new_c]
+    
+    r=new_r
+    c=new_c
+    new_r = c
+    new_c = dim - r - 1
+    #3
+    mat[r,c] = mat[new_r,new_c]
+    
+    r=new_r
+    c=new_c
+    new_r = c
+    new_c = dim - r - 1
+    #4
+    mat[r,c] = no1
+    
+
+
+    
+def rotate_mat_90(mat):
+    print mat
+    
+    (row, col) = mat.shape
+    
+    for r in range(row/2):
+        for c in range(r, col-r-1):
+            _rotate(mat,r,c, row)
+            
+    print mat
+            
+    
+    
+def main_rotate_mat_90():
+    mat = np.zeros((5,5))
+    mat.flat[:] = range(5*5)
+    
+    rotate_mat_90(mat)
+    
+    
+
+
 
 """
 1.7 Write an algorithm such that if an element in an MxN matrix is 0, its entire row
@@ -198,23 +253,7 @@ and column are set to 0.
 pg
 """
 
-loop_count = 100
 
-def method1():
-    out_str = ''
-    for num in xrange(loop_count):
-        out_str += 'num'
-    return out_str
-
-def method4():
-    str_list = []
-    for num in xrange(loop_count):
-        str_list.append('num')
-    return ''.join(str_list)           
-    
-    
-def foo(arg):
-    pass
 
 if __name__ == "__main__":
     import timeit
@@ -228,8 +267,8 @@ if __name__ == "__main__":
 #     print timeit.timeit("compress_good('aabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaaaabcccccaaa')", setup="from __main__ import compress_good")
 #     print timeit.timeit("foo('aabcccccaaa')", setup="from __main__ import foo")
 #     print compress_good('aabcccccaaa')
+    main_rotate_mat_90()
     
-    print timeit.timeit("method1()", setup="from __main__ import method1")
-    print timeit.timeit("method4()", setup="from __main__ import method4")
+
     
     print "Done"

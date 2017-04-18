@@ -6,7 +6,8 @@
  *
  */
 
-#include <android/trace.h>
+#include <utils/Trace.h> /*[CLS]:use this*/
+/*#include <android/trace.h>*/
 
 
 #define L1(def) #def
