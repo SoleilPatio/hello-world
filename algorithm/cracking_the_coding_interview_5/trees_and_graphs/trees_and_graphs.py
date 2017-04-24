@@ -80,10 +80,166 @@ this question, a balanced tree is defined to be a tree such that the heights of 
 two subtrees of any node never differ by more than one.
 """
 
+def check_balanced(tree):
+	if tree != None:
+		is_l_balanced, l_count = check_balanced(tree.left)
+		is_r_balanced, r_count = check_balanced(tree.right)
+		is_balanced = True if abs(l_count-r_count) <= 1 else False
+		return is_balanced, (l_count + r_count + 1)
+	else:
+		return True, 0
+		
+def main_check_balanced():
+	tree = None
+# 	for data in [1,2,3]:
+	for data in [4,2,1,3,6,5,7]:
+		if tree == None:
+			tree = BinTree(data)
+		else:
+			tree.AddNode(data)
+			
+	tree.Show()
+	
+	print "\nIs Balanced?", check_balanced(tree)
+	
+	
+
 """
 4.2 Given a directed graph, design an algorithm to find out whether there is a route
 between two nodes.
 """
+class MyGraph(object):
+	node_table = {}
+	def __init__(self, data=None):
+		self.data = data
+		self.link_to = []
+		
+	def AddSingleLink(self, from_data, to_data):
+		if from_data in MyGraph.node_table:
+			from_node = MyGraph.node_table[from_data]
+		else:
+			from_node = MyGraph(from_data)
+			MyGraph.node_table[from_data] = from_node
+			
+			
+		if to_data in MyGraph.node_table:
+			to_node = MyGraph.node_table[to_data]
+		else:
+			to_node = MyGraph(to_data)
+			MyGraph.node_table[to_data] = to_node
+			
+		#add link from head to A
+		self.link_to.append(from_node)
+		
+		#add link from A to B
+		from_node.link_to.append(to_node)
+		
+	def is_connected(self, from_data, to_data):
+		if from_data in MyGraph.node_table.keys():
+			from_node = MyGraph.node_table[from_data]
+		else:
+			return False
+		
+		if to_data in MyGraph.node_table.keys():
+			to_node = MyGraph.node_table[to_data]
+		else:
+			return False
+		
+		
+		print "BFS:", self.check_bfs(from_node, to_node)
+		print "DFS:", self.check_dfs(from_node, to_node)
+		
+		
+		
+	def check_bfs(self, from_node, to_node):
+		bfs_q = Queue()
+		
+		node = from_node
+		
+		while( node != None):
+			if node.data == to_node.data:
+				return True
+			for l in node.link_to:
+				bfs_q.Queue(l)
+				
+			node = bfs_q.Dequeue()
+		
+		return False
+	
+	def check_dfs(self, from_node, to_node):
+		
+		if from_node == None:
+			return False
+		
+		if from_node.data == to_node.data:
+			print from_node.data,"->",
+			return True
+		
+		for l in from_node.link_to:
+			ret = self.check_dfs(l, to_node)
+			if ret == True:
+				print from_node.data,"->",
+				return True
+			
+		return False
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	def Show(self):
+		node_count = {}
+		bfs_q = Queue()
+		sep_node = MyGraph("---")
+		
+		bfs_q.Queue(self)
+		node_count[self] = 1
+		
+		node = bfs_q.Dequeue()
+		while node != None:
+			print node.data
+			
+			for n in node.link_to:
+				if n not in node_count.keys():
+					bfs_q.Queue(n)
+					node_count[n] = 1
+					
+			if len(node.link_to) > 0:
+				#add sep
+				bfs_q.Queue(sep_node)
+			
+			node = bfs_q.Dequeue()
+					
+				
+			
+			
+	
+	
+			
+		
+		
+
+def main_is_connected():
+	g1 = MyGraph()
+	
+	g1.AddSingleLink(1, 2)
+	g1.AddSingleLink(2, 4)
+	g1.AddSingleLink(2, 3)
+	g1.AddSingleLink(5, 3)
+	g1.AddSingleLink(6, 3)
+	
+	g1.Show()
+	
+	g1.is_connected(1,4)
+	g1.is_connected(1,6)
+	
+			
+		
+		
 
 """
 4.3 Given a sorted (increasing order) array with unique integer elements, write an
@@ -130,5 +286,7 @@ start or end at the root or a leaf.
 
 
 if __name__ == "__main__":
-	main_my_tree_test()
+# 	main_my_tree_test()
+# 	main_check_balanced()
+	main_is_connected()
 	print "\nDone"
