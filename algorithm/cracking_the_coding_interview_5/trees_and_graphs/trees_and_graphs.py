@@ -108,143 +108,152 @@ def main_check_balanced():
 4.2 Given a directed graph, design an algorithm to find out whether there is a route
 between two nodes.
 """
-class MyGraph(object):
-	node_table = {}
-	def __init__(self, data=None):
-		self.data = data
-		self.link_to = []
-		
-	def AddSingleLink(self, from_data, to_data):
-		if from_data in MyGraph.node_table:
-			from_node = MyGraph.node_table[from_data]
-		else:
-			from_node = MyGraph(from_data)
-			MyGraph.node_table[from_data] = from_node
-			
-			
-		if to_data in MyGraph.node_table:
-			to_node = MyGraph.node_table[to_data]
-		else:
-			to_node = MyGraph(to_data)
-			MyGraph.node_table[to_data] = to_node
-			
-		#add link from head to A
-		self.link_to.append(from_node)
-		
-		#add link from A to B
-		from_node.link_to.append(to_node)
-		
-	def is_connected(self, from_data, to_data):
-		if from_data in MyGraph.node_table.keys():
-			from_node = MyGraph.node_table[from_data]
-		else:
-			return False
-		
-		if to_data in MyGraph.node_table.keys():
-			to_node = MyGraph.node_table[to_data]
-		else:
-			return False
-		
-		
-		print "BFS:", self.check_bfs(from_node, to_node)
-		print "DFS:", self.check_dfs(from_node, to_node)
-		
-		
-		
-	def check_bfs(self, from_node, to_node):
-		bfs_q = Queue()
-		
-		node = from_node
-		
-		while( node != None):
-			if node.data == to_node.data:
-				return True
-			for l in node.link_to:
-				bfs_q.Queue(l)
-				
-			node = bfs_q.Dequeue()
-		
-		return False
+import collections
+
+def is_connected_bfs(graph, fr, to):
+	bfs_que = collections.deque()
 	
-	def check_dfs(self, from_node, to_node):
-		
-		if from_node == None:
-			return False
-		
-		if from_node.data == to_node.data:
-			print from_node.data,"->",
-			return True
-		
-		for l in from_node.link_to:
-			ret = self.check_dfs(l, to_node)
-			if ret == True:
-				print from_node.data,"->",
-				return True
-			
-		return False
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	def Show(self):
-		node_count = {}
-		bfs_q = Queue()
-		sep_node = MyGraph("---")
-		
-		bfs_q.Queue(self)
-		node_count[self] = 1
-		
-		node = bfs_q.Dequeue()
-		while node != None:
-			print node.data
-			
-			for n in node.link_to:
-				if n not in node_count.keys():
-					bfs_q.Queue(n)
-					node_count[n] = 1
-					
-			if len(node.link_to) > 0:
-				#add sep
-				bfs_q.Queue(sep_node)
-			
-			node = bfs_q.Dequeue()
-					
-				
-			
-			
-	
-	
-			
-		
+	path = [fr]
+	bfs_que.append(path)
+# 	while True:
+	while bfs_que:
+		if len(bfs_que) == 0:
+			return False, None
+		path = bfs_que.popleft()
+		node = path[-1]
+		if node == to:
+			return True, path
+		else:
+			for adjacent in graph.get(node,[]):
+				newpath = list(path)
+				newpath.append(adjacent)
+				bfs_que.append(newpath)
 		
 
 def main_is_connected():
-	g1 = MyGraph()
+	Graph = {
+			1:[2,3],
+			5:[3],
+			6:[4],
+			3:[4],
+		}
 	
-	g1.AddSingleLink(1, 2)
-	g1.AddSingleLink(2, 4)
-	g1.AddSingleLink(2, 3)
-	g1.AddSingleLink(5, 3)
-	g1.AddSingleLink(6, 3)
+	print is_connected_bfs(Graph, 1, 4)
 	
-	g1.Show()
+	quetest = collections.deque([1,2,3,4,5,6,7,8])
 	
-	g1.is_connected(1,4)
-	g1.is_connected(1,6)
+	while quetest:
+		print quetest.popleft()
 	
+	pass
+
 			
 		
 		
 
 """
+[CLS] DO-AGAIN
 4.3 Given a sorted (increasing order) array with unique integer elements, write an
 algorithm to create a binary search tree with minimal height.
 """
+import numpy as np
+
+class BinSearchTree(object):
+	def __init__(self,data):
+		self.data = data
+		self.left = None
+		self.right = None
+		
+	def add(self, data):
+		if self.data == None:
+			self.data = data
+			return
+		
+		if data < self.data:
+			if self.left == None:
+				self.left = BinSearchTree(data)
+				return
+			else:
+				self.left.add(data)
+		else:
+			if self.right == None:
+				self.right = BinSearchTree(data)
+				return
+			else:
+				self.right.add(data)
+			
+	
+	def show(self):
+		import collections
+		bfs_q = collections.deque()
+		
+		level = 0
+		last_level = 0
+		bfs_q.append((self,level))
+		while bfs_q:
+			node, level = bfs_q.popleft()
+			if last_level != level:
+				print ""
+			if node != None:
+				print node.data,
+				bfs_q.append((node.left, level+1))
+				bfs_q.append((node.right, level+1))
+			else:
+				print "X",
+			
+			last_level = level 	
+
+
+def construct_bintree(tree, sort_array, fr, to):
+	if fr == to:
+		tree.add(sort_array[fr])
+		print sort_array[fr]
+		return
+	
+	if to - fr == 1:
+		tree.add(sort_array[fr])
+		print sort_array[fr]
+		tree.add(sort_array[to])
+		print sort_array[to]
+		return
+	
+	
+	mid = (fr + to) /2
+	tree.add(sort_array[mid])
+	print sort_array[mid]
+	
+	
+	construct_bintree(tree, sort_array, fr, mid-1 if (mid-1 >= fr) else fr)
+	construct_bintree(tree, sort_array, mid+1 if (mid+1 <= to) else to, to)
+	
+	
+	
+	
+	
+
+def main_construct_bintree():
+	sort_array = np.array(range(11))
+# 	sort_array = [4,2,1,3,6,5,7]
+	
+	print sort_array
+	
+	tree = None
+	for x in sort_array:
+		if tree == None:
+			tree = BinSearchTree(x)
+		else:
+			tree.add(x)
+	
+	tree.show()
+	
+	print ""
+	tree = BinSearchTree(None)
+	construct_bintree(tree, sort_array, 0, len(sort_array)-1)
+	print "------------------"
+	tree.show()
+	
+	
+	
 
 """
 4.4 Given a binary tree, design an algorithm which creates a linked list of all the
@@ -288,5 +297,6 @@ start or end at the root or a leaf.
 if __name__ == "__main__":
 # 	main_my_tree_test()
 # 	main_check_balanced()
-	main_is_connected()
+# 	main_is_connected()
+	main_construct_bintree()
 	print "\nDone"
