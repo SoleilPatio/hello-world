@@ -260,11 +260,130 @@ def main_construct_bintree():
 nodes at each depth (e.g., if you have a tree with depth D, you'll have D linked
 lists).
 """
+import collections
+def create_level_list(btree):
+	ret_lists = []
+	bfs_q = collections.deque()
+	
+	head_node = btree.get("head",None)
+	
+	level = 0
+	bfs_q.append((head_node, level))
+	
+	while bfs_q:
+		node, level = bfs_q.popleft()
+		
+		if len(ret_lists) < (level+1):
+			ret_lists.append([])
+		ret_lists[level].append(node)
+		
+		for child in btree.get(node,[]):
+			bfs_q.append((child, level+1))
+			
+	return ret_lists
+	
+
+def create_level_list_bfs(btree, lists, level=0, root="head"):
+	
+	if root == None:
+		return
+	
+	if root == "head":
+		root = btree.get("head", None)
+		level = 0
+		
+	if len(lists) == level:
+		lists.append([])
+	
+	lists[level].append(root)
+	
+	for child in btree.get(root, []):
+		create_level_list_bfs(btree, lists, level+1, child)
+	
+	
+	
+
+def main_create_level_list():
+	btree = {
+			"head" : 0,
+			0 : [1,2],
+			1 : [3,4],
+			2 : [5,6]
+			}
+	
+	lists = create_level_list(btree)
+	
+	for list in lists:
+		print list
+	
+	
+	lists = []
+	create_level_list_bfs(btree, lists)
+	
+	for list in lists:
+		print list
+		
+		
+		
 
 """
 4.5 Implement a function to check if a binary tree is a binary search tree.
 """
+def check_is_bin_search_tree(tree, node):
+	
+	my_result = True
+	childs = tree.get(node,[])
+	count = len(childs)
+	if count == 0:
+		left = None
+		right = None
+		return True
+	elif count == 1:
+		left = childs[0]
+		right = None
+		if left > node:
+			my_result = False
+	else:
+		left = childs[0]
+		right = childs[1]
+		if left > node or node >= right:
+			my_result = False
+		
+	if my_result == False:
+		return False
+	
+	l_result = check_is_bin_search_tree(tree, left)
+	r_result = check_is_bin_search_tree(tree, right)
+	
+	
+	return l_result and r_result and my_result
+		
+	
+	
+	
 
+def main_check_is_bin_search_tree():
+	tree1 = {
+			"head":4,
+			4:[2,5],
+			2:[1,3],
+			5:[None,6]
+			}
+	
+	print check_is_bin_search_tree(tree1, tree1["head"])
+	
+	tree1 = {
+			"head":4,
+			4:[2,5],
+			2:[3,1],
+			5:[None,None]
+			}
+	
+	print check_is_bin_search_tree(tree1, tree1["head"])
+	
+	
+	
+	
 """
 4.6 Write an algorithm to find the'next'node (i.e., in-order successor) of a given node
 in a binary search tree. You may assume that each node has a link to its parent.
@@ -300,4 +419,8 @@ if __name__ == "__main__":
 # 	main_is_connected()
 # 	main_construct_bintree()
 # 	main_check_balanced()
+# 	main_create_level_list()
+	main_check_is_bin_search_tree()
+	
+	
 	print "\nDone"
