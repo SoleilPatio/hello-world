@@ -85,14 +85,14 @@ def check_balanced(tree):
 		is_l_balanced, l_count = check_balanced(tree.left)
 		is_r_balanced, r_count = check_balanced(tree.right)
 		is_balanced = True if abs(l_count-r_count) <= 1 else False
-		return is_balanced, (l_count + r_count + 1)
+		return is_balanced, max(l_count, r_count) + 1
 	else:
 		return True, 0
 		
 def main_check_balanced():
 	tree = None
-# 	for data in [1,2,3]:
-	for data in [4,2,1,3,6,5,7]:
+	for data in [1,4,2,1,3,6,5,7]:
+# 	for data in [4,2,1,3,6,5,7]:
 		if tree == None:
 			tree = BinTree(data)
 		else:
@@ -298,5 +298,6 @@ if __name__ == "__main__":
 # 	main_my_tree_test()
 # 	main_check_balanced()
 # 	main_is_connected()
-	main_construct_bintree()
+# 	main_construct_bintree()
+# 	main_check_balanced()
 	print "\nDone"
