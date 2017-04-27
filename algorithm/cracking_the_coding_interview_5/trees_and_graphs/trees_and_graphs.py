@@ -1,3 +1,5 @@
+from test.pystone import PtrGlb
+from platform import node
 class Queue(object):
 	def __init__(self):
 		self.list = []
@@ -388,6 +390,107 @@ def main_check_is_bin_search_tree():
 4.6 Write an algorithm to find the'next'node (i.e., in-order successor) of a given node
 in a binary search tree. You may assume that each node has a link to its parent.
 """
+class dbstree(object):
+	def __init__(self, data=None):
+		self.data = data
+		self.left = None
+		self.right = None
+		self.parent = None
+		
+	def add(self,data):
+		if self.data == None:
+			self.data = data
+			return
+		
+		if data <= self.data:
+			if self.left == None:
+				self.left = dbstree(data)
+				self.left.parent = self
+			else:
+				self.left.add(data)
+		else:
+			if self.right == None:
+				self.right = dbstree(data)
+				self.right.parent = self
+			else:
+				self.right.add(data)
+				
+	def left_most(self, node):
+		if node == None:
+			return None
+					
+		ptr = node
+		while True:
+			if ptr.left == None:
+				return ptr
+			else:
+				ptr = ptr.left
+				
+	def next(self,node):
+		if node == None:
+			return None
+			
+		#if I am root or a right child
+		if node.parent == None:
+			return node.left_most(node.right)
+		
+		if node.parent.right == node:
+			return node.left_most(node.right)
+			
+		#if I am a left child
+		if node.parent.left == node:
+			next_node = node.left_most(node.right)
+			if next_node == None:
+				next_node = node.parent
+			return next_node
+			
+		
+		
+		
+	def show(self):
+		import collections
+		level_q = collections.deque()
+		
+		level = 0
+		last_level = level
+		level_q.append((self,level))
+		
+		while level_q:
+			node, level = level_q.popleft()
+			
+			if last_level != level:
+				print ""
+			
+			if node == None:
+				print "x",
+			else:
+				next_node = node.next(node)
+				nn = str(next_node.data) if next_node != None else "x"
+				print node.data,"(%s)"%nn,
+				level_q.append((node.left, level+1))
+				level_q.append((node.right, level+1))
+				
+			last_level = level
+			
+		print ""
+			
+		
+		
+		
+def main_find_next():
+	import numpy as np
+	tree = dbstree()
+	
+	for d in np.random.randint(10,size=10):
+		tree.add(d)
+		
+	tree.show()
+	
+	print "-------"
+	
+		
+
+
 
 """
 4.7 Design an algorithm and write code to find the first common ancestor of two
@@ -420,7 +523,8 @@ if __name__ == "__main__":
 # 	main_construct_bintree()
 # 	main_check_balanced()
 # 	main_create_level_list()
-	main_check_is_bin_search_tree()
+# 	main_check_is_bin_search_tree()
+	main_find_next()
 	
 	
 	print "\nDone"
