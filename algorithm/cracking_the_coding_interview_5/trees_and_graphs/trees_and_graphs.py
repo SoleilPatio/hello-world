@@ -497,14 +497,186 @@ def main_find_next():
 nodes in a binary tree. Avoid storing additional nodes in a data structure. NOTE:
 This is not necessarily a binary search tree.
 """
+import collections
+class bintree47(object):
+	def __init__(self, data=None):
+		self.data = data
+		self.left = None
+		self.right = None
+		
+	def add_balence(self, data):
+		if self.data == None:
+			self.data = data
+			return
+		
+		bfs_q = collections.deque()
+		bfs_q.append(self)
+		while bfs_q:
+			node = bfs_q.popleft()
+			if node.left == None:
+				node.left = bintree47(data)
+				break
+			elif node.right == None:
+				node.right = bintree47(data)
+				break
+			
+			if node.left:
+				bfs_q.append(node.left)
+			if node.right:
+				bfs_q.append(node.right)
+				
+	def show(self):
+		bfs_q = collections.deque()
+		
+		last_level = 0
+		level = 0
+		bfs_q.append((self,level))
+		
+		while bfs_q:
+			node, level = bfs_q.popleft()
+			
+			if last_level != level:
+				print ""
+			if node:
+				print node.data,
+				bfs_q.append((node.left,level+1))
+				bfs_q.append((node.right,level+1))
+			else:
+				print "x",
+			
+			last_level = level
+			
+		print ""
+			
+	def cover(self,data):
+		if self.data == data:
+			return True
+		
+		if self.left:
+			if self.left.cover(data):
+				return True
+		if self.right:
+			if self.right.cover(data):
+				return True
+		return False
+			
+		
+		
+		
+			
+
+def find_common_ancestor(tree, a, b):
+	bfs_q = collections.deque()
+	bfs_q.append(tree)
+	
+	last_common_node = None
+	while bfs_q:
+		node = bfs_q.popleft()
+		
+		b_cover_a = node.cover(a)
+		b_cover_b = node.cover(b)
+		
+		if b_cover_a and b_cover_b:
+			last_common_node = node
+			if node.left:
+				bfs_q.append(node.left)
+			if node.right: 
+				bfs_q.append(node.right)
+			
+			
+	common_data = last_common_node.data if last_common_node else None
+	
+	print a, b, common_data
+	return last_common_node
+			
+		
+		
+		
+
+
+			
+import numpy as np
+def main_find_common_ancestor():
+	tree = bintree47()
+	
+	data_list = range(15)
+# 	np.random.shuffle(data_list)
+	for data in data_list:
+		tree.add_balence(data)
+		
+	tree.show()
+	
+	find_common_ancestor(tree,7,8)
+	find_common_ancestor(tree,7,10)
+	find_common_ancestor(tree,5,14)
+		
+
 
 """
-4.8 You have two very large binary trees: Tl, with millions of nodes, and T2, with
-hundreds of nodes. Create an algorithm to decide ifT2 is a subtree of Tl.
-A tree T2 is a subtree of Tl if there exists a node n in Tl such that the subtree of
+4.8 You have two very large binary trees: T1, with millions of nodes, and T2, with
+hundreds of nodes. Create an algorithm to decide if T2 is a subtree of Tl.
+A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of
 n is identical to T2. That is, if you cut off the tree at node n, the two trees would
 be identical.
 """
+
+def tree_match(tree1, tree2):
+	if tree1 == None and tree2 == None:
+		return True
+	
+	if tree1 == None or tree2 == None:
+		return False
+	
+	if tree1.data == tree2.data:
+		l_result = tree_match(tree1.left, tree2.left)
+		if l_result==False:
+			return False
+		r_result = tree_match(tree1.right, tree2.right)
+		if r_result==False:
+			return False
+		return True
+		
+	else:
+		return False
+	
+def is_sub_tree(tree1, tree2):
+	queue = collections.deque()
+	queue.append(tree1)
+	
+	while queue:
+		node = queue.popleft()
+		if tree_match(node,tree2):
+			return True
+		
+		if node:
+			queue.append(node.left)
+			queue.append(node.right)
+			
+	return False
+	
+	
+	
+		
+		
+def main_check_subtree():
+	tree1 = bintree47()
+	tree2 = bintree47()
+	
+	for d in range(15):
+		tree1.add_balence(d)
+	tree1.show()
+	
+	for d in [6,13,14]:
+		tree2.add_balence(d)
+	tree2.show()
+	
+	print is_sub_tree(tree1, tree2)
+	
+	
+		
+		
+	
+	
 
 """
 4.9 You are given a binary tree in which each node contains a value. Design an algorithm
@@ -512,6 +684,21 @@ to print all paths which sum to a given value. The path does not need to
 start or end at the root or a leaf.
 """
 
+
+"""
+[CLS]
+construct a bin tree from in-order & pre-order sequence
+in[]   = {4, 8, 2, 5, 1, 6, 3, 7}
+post[] = {8, 4, 5, 2, 6, 7, 3, 1} 
+Output : Root of below tree
+          1
+       /     \
+     2        3
+   /    \   /   \
+  4     5   6    7
+    \
+      8
+"""
 		
 		
 
@@ -524,7 +711,9 @@ if __name__ == "__main__":
 # 	main_check_balanced()
 # 	main_create_level_list()
 # 	main_check_is_bin_search_tree()
-	main_find_next()
+# 	main_find_next()
+# 	main_find_common_ancestor()
+	main_check_subtree()
 	
 	
 	print "\nDone"
