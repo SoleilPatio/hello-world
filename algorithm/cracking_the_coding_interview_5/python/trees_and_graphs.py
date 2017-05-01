@@ -684,7 +684,53 @@ def main_check_subtree():
 to print all paths which sum to a given value. The path does not need to
 start or end at the root or a leaf.
 """
+def check_sum(root,target,sub_total,pathlist):
+	
+	if root == None:
+		return False
+	
+	pathlist.append(root.data)
+	if (root.data + sub_total) == target:
+		print pathlist
+		return True
+	
+	sub_total = root.data + sub_total
+	check_sum(root.left,target,sub_total,list(pathlist))
+	check_sum(root.right,target,sub_total,list(pathlist))
+	
+	return False
 
+def check_sum_all(tree,target):
+	queue = collections.deque()
+	
+	queue.append(tree)
+	while queue:
+		node = queue.popleft()
+		if node != None:
+			check_sum(node, target, 0, [])
+			queue.append(node.left)
+			queue.append(node.right)
+			
+
+
+def main_check_sum():
+	tree = bintree47()
+	
+	for data in range(20):
+		tree.add_balence(data)
+		
+	tree.show()
+	
+	check_sum_all(tree,20)
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 """
 [CLS]
@@ -700,7 +746,59 @@ Output : Root of below tree
     \
       8
 """
+
+def construct_tree(in_order, post_order):
+	
+	if not in_order:
+		return None
+	
+	tree = bintree47()
+	
+	root_data = post_order.pop()
+	tree.add_balence(root_data)
+	
+	root_index = in_order.index(root_data)
+	right_list = in_order[root_index+1:]
+	left_list = in_order[0:root_index]
+	
+	if right_list:
+		tree.right = construct_tree(right_list,post_order  )
 		
+	if left_list:
+		tree.left = construct_tree(left_list,post_order  )
+		
+	return tree
+		
+		
+def main_construct_tree():
+	in_order = [4, 8, 2, 5, 1, 6, 3, 7]
+	post_order= [8, 4, 5, 2, 6, 7, 3, 1] 
+	
+	
+	tree = construct_tree(in_order, post_order)
+	print "in_order:", in_order
+	print "post_order:", post_order
+	
+	tree.show()
+	
+	
+	
+		
+		
+		
+		
+			
+			
+		
+		
+	
+	
+	
+	
+		
+		
+
+
 		
 
 
@@ -714,7 +812,9 @@ if __name__ == "__main__":
 # 	main_check_is_bin_search_tree()
 # 	main_find_next()
 # 	main_find_common_ancestor()
-	main_check_subtree()
+# 	main_check_subtree()
+# 	main_check_sum()
+	main_construct_tree()
 	
 	
 	print "\nDone"
