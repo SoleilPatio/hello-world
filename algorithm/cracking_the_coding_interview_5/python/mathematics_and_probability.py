@@ -93,7 +93,7 @@ parallel to the x-axis.
 7.6 Given a two-dimensional graph with points on it, find a line which passes the
 most number of points.
 """
-THRESHOLD = 0.001
+THRESHOLD = 0.5
 import math
 class point(object):
     def __init__(self, x, y):
@@ -112,34 +112,35 @@ class line(object):
             self.slope = None #slop == None means vertical line
             self.intercept = p1.x
             
-        print "line=",self.slope,self.intercept,p2.x,p1.x,THRESHOLD
     def __cmp__(self, other):
-        print "i am cmp"
+        
         if self.slope != None and other.slope != None:
+#             print "cmp:slope(%f,%f) intercept(%f,%f)"%(self.slope,other.slope,self.intercept,other.intercept )
             if (abs(self.slope - other.slope) < THRESHOLD) and (abs(self.intercept - other.intercept) < THRESHOLD):
                 return 0
             else:
                 return -1
         elif self.slope == None and other.slope == None:
+#             print "cmp:slope(None,None) intercept(%f,%f)"%(self.intercept,other.intercept )
             if (abs(self.intercept - other.intercept) < THRESHOLD):
                 return 0
             else:
                 return -1
         return -1
                 
-    def __eq__(self, other):
-        print "i am eq",self.slope,other.slope,self.intercept ,other.intercept
-        if self.slope != None and other.slope != None:
-            if (abs(self.slope - other.slope) < THRESHOLD) and (abs(self.intercept - other.intercept) < THRESHOLD):
-                return True
-            else:
-                return False
-        elif self.slope == None and other.slope == None:
-            if (abs(self.intercept - other.intercept) < THRESHOLD):
-                return True
-            else:
-                return False
-        return False
+#     def __eq__(self, other):
+#         print "i am eq",self.slope,other.slope,self.intercept ,other.intercept
+#         if self.slope != None and other.slope != None:
+#             if (abs(self.slope - other.slope) < THRESHOLD) and (abs(self.intercept - other.intercept) < THRESHOLD):
+#                 return True
+#             else:
+#                 return False
+#         elif self.slope == None and other.slope == None:
+#             if (abs(self.intercept - other.intercept) < THRESHOLD):
+#                 return True
+#             else:
+#                 return False
+#         return False
         
             
 class line_hash(object):
@@ -163,8 +164,9 @@ class line_hash(object):
         key = self.round_number(slope)
         count = 0
         for l in self.hash.get(key,[]):
-            print "compare", line == l
-            if line == l:
+            cmp = line == l
+            print "cmp=",cmp
+            if cmp:
                 count += 1
         return count
         
@@ -178,7 +180,7 @@ class line_hash(object):
             c2 = self.count_identical_lines_by_slope(line.slope, line)
             c3 = self.count_identical_lines_by_slope(line.slope+THRESHOLD, line)
         
-        print c1,c2,c3
+        print c1,c2,c3,"=",c1+c2+c3
         return c1+c2+c3
                 
 
@@ -193,26 +195,26 @@ def find_the_best_line(points):
     
     for i , p1 in enumerate(points):
         for j , p2 in enumerate(points[i+1:]):
-            print "(i,j)=",i,j
             ll = line(p1,p2)
             linstable.add_line_to_hash(ll)
             count = linstable.count_identical_lines(ll)
-            
             if (count > max_count):
                 best_line = ll
                 max_count = count
                 
-    return best_line, count
+    return best_line, max_count
             
 
 
 def main_find_best_line():
+    POINT_COUNT = 50
     import numpy as np
-    points = [point(0,0) for _ in range(10)]
-    randoms = np.random.randint(5, size = 20)
+    points = [point(0,0) for _ in range(POINT_COUNT)]
+    randoms = np.random.randint(100, size = POINT_COUNT*2)
+#     randoms = [10,10,20,20,30,30,40,40,50,50,60,60,70,70,80,80,90,90]
     print randoms
-    for i in range(10):
-        points[i].set(float(randoms[i]), float(randoms[i+1]))
+    for i in range(POINT_COUNT):
+        points[i].set(float(randoms[i])/10, float(randoms[i+1])/10)
     
     for p in points:
         print p.x, p.y
@@ -222,6 +224,23 @@ def main_find_best_line():
     
     print "best_line.slope", best_line.slope, "best_line.intercept", best_line.intercept
     print "count", count
+    
+    import matplotlib.pyplot as plt
+    
+    plt.plot([points[i].x for i in range(POINT_COUNT) ], [points[i].y for i in range(POINT_COUNT)], "o" )
+    
+    if best_line.slope != None:
+        x = [0,10]
+        y = [best_line.slope*xi + best_line.intercept for xi in x ]
+        
+    else:
+        x = [best_line.intercept, best_line.intercept]
+        y = [0, 10]
+
+    plt.plot(x, y)
+    plt.show()
+    
+    
     
     
     
@@ -242,5 +261,8 @@ if __name__ == "__main__":
 #     print timeit.timeit("main_gen_primes2()", setup="from __main__ import main_gen_primes2",number=1)
     
     main_find_best_line()
+
+
+
     
     print "Done!"
