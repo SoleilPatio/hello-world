@@ -2,6 +2,7 @@
 ex1: recursive fibonacci w/ dynamic programming
 ex2: iteration fibonacci
 """
+from multiprocessing import Queue
 def fibonacci(nth):
     if nth == 1:
         return 0
@@ -234,6 +235,38 @@ def main_all_subset():
 """
 9.5 Write a method to compute all permutations of a string.
 """
+def permutate_string(instr):
+    import collections
+    level_queue = collections.deque()
+    
+    level_queue.append(([],list(instr)))
+    
+    count = 1
+    while level_queue:
+        path, remain = level_queue.popleft()
+        
+        if remain == []:
+            print count,":","".join(path)
+            count +=1
+        
+        for i, c in enumerate(remain):
+            new_remain = list(remain)
+            del new_remain[i]
+            new_path = list(path)
+            new_path.append(c)
+            level_queue.append((new_path, new_remain))
+            
+            
+            
+def main_permutate_str():
+    permutate_string("Clouds")
+    
+        
+    
+
+
+
+
 
 """
 9.6 Implement an algorithm to print all valid (e.g., properly opened and closed)
@@ -286,7 +319,8 @@ if __name__ == "__main__":
 #     main_fibonacci()
 #     main_possible_path()
 #     main_find_magic()
-    main_all_subset()
+#     main_all_subset()
+    main_permutate_str()
     
     
     print "Done"
