@@ -256,10 +256,39 @@ def permutate_string(instr):
             new_path.append(c)
             level_queue.append((new_path, new_remain))
             
+
+def permutate_string_recursive(instr):
+    str_list = list(instr)
+    
+    if len(str_list) == 0:
+        return [[]]
+
+
+    c = str_list.pop() #the right most character
+    new_str = "".join(str_list)
+    per_list = permutate_string_recursive(new_str)
+    
+    ret_list = []
+    for p in per_list:
+        for i in range(len(p)+1):
+            new_p = list(p)
+            new_p.insert(i,c)
+            ret_list.append(new_p)
             
+    return ret_list
+        
+    
+    
+    
+    
             
 def main_permutate_str():
-    permutate_string("Clouds")
+#     permutate_string("Clouds")
+    ret_list = permutate_string_recursive("Clouds")
+    
+    for i,p in enumerate(ret_list):
+        print i+1,"".join(p)
+    
     
         
     
@@ -275,6 +304,49 @@ EXAMPLE
 Input: 3
 Output: ((())), (()()), (())(), ()(()), ()()()
 """
+
+def parentheses(n):
+    import collections
+    remain_r = n
+    remain_l = n
+    
+    queue = collections.deque()
+    
+    remain_l = remain_l-1
+    queue.append( (remain_r, remain_l, ['(']))
+    
+    resutl_list = []
+    while queue:
+        r, l, str_list = queue.popleft()
+        
+        
+        if l > 0:
+            new_list = list(str_list)
+            new_list.append('(')
+            queue.append( (r, l-1, new_list ))
+            
+        if r > 0 and r > l:
+            new_list = list(str_list)
+            new_list.append(')')
+            queue.append( (r-1, l, new_list))
+        
+        if r == 0 and l == 0:
+            new_list = list(str_list)
+            resutl_list.append(new_list)
+            
+    for i,l in enumerate(resutl_list):
+        print i,":","".join(l)
+        
+            
+    
+def main_parentheses():
+    parentheses(3)
+        
+    
+
+
+
+
 
 """
 9.7 Implement the "paint fill" function that one might see on many image editing
@@ -320,7 +392,8 @@ if __name__ == "__main__":
 #     main_possible_path()
 #     main_find_magic()
 #     main_all_subset()
-    main_permutate_str()
+#     main_permutate_str()
+    main_parentheses()
     
     
     print "Done"
