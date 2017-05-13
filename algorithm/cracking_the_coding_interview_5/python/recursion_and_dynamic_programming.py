@@ -304,6 +304,27 @@ EXAMPLE
 Input: 3
 Output: ((())), (()()), (())(), ()(()), ()()()
 """
+def parentheses(n, left, right, path):
+    
+    if left == n and right == n:
+        print "".join(path)
+        return
+    
+    #add "("?
+    if left < n:
+        new_path = list(path)
+        new_path.append('(')
+        parentheses(n, left+1, right, new_path)
+    if right < n and left > right:
+        new_path = list(path)
+        new_path.append(')')
+        parentheses(n, left, right+1, new_path)
+        
+
+def main_parenthesis():
+    parentheses(10, 0, 0, [])
+    
+    
 
 def parentheses(n):
     import collections
@@ -355,33 +376,270 @@ colors), a point, and a new color, fill in the surrounding area until the color
 changes from the original color.
 """
 
+class Point(object):
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+        
+    
+def paint_fill(map, point, oldcolor, newcolor):
+    w , h = map.shape
+    
+    if point.x < 0 or point.x >= w:
+        return
+    if point.y < 0 or point.y >= h:
+        return
+    
+    if map[point.x][point.y] == oldcolor:
+        
+        map[point.x][point.y] = newcolor
+    
+        #up
+        new_point = Point(point.x-1,point.y)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        #left
+        new_point = Point(point.x,point.y-1)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        #down
+        new_point = Point(point.x+1,point.y)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        #right
+        new_point = Point(point.x,point.y+1)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        
+        #up
+        new_point = Point(point.x-1,point.y-1)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        #left
+        new_point = Point(point.x+1,point.y-1)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        #down
+        new_point = Point(point.x+1,point.y+1)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        #right
+        new_point = Point(point.x-1,point.y+1)
+        paint_fill(map, new_point, oldcolor, newcolor)
+        
+    else:
+        return
+
+
+
+def main_paint_fill():
+    import numpy as np
+    map = np.zeros((5,5), dtype='i')
+    
+    for i in range(map.shape[0]):
+        map[i][i]=1 
+    
+    map[2][1]=1 
+    
+    print map
+    
+    paint_fill(map, Point(3,3), 1, 2)
+
+    print map
 """"
 9.8 Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5
 cents) and pennies (1cent), write code to calculate the number of ways of representing n cents.
 """
+def money(n):
+    if n < 0:
+        return -1 , None
+    if n == 0:
+        return 0 , [[]]
+    if n == 1:
+        return 1 , [[1]]
+    
+    sum = 0
+    
+    ret_paths = []
+    count, paths = money(n-1)
+    if count >= 0:
+        for path in paths:
+            path.append(1)
+        sum += count
+        ret_paths.extend(paths)
+    
+    count, paths = money(n-5)
+    if count>= 0:
+        for path in paths:
+            path.append(5)
+        sum += count
+        ret_paths.extend(paths)
+    
+    count, paths = money(n-10)
+    if count>= 0:
+        for path in paths:
+            path.append(10)
+        sum += count
+        ret_paths.extend(paths)
+    
+    count, paths = money(n-25)
+    if count>= 0:
+        for path in paths:
+            path.append(25)
+        sum += count
+        ret_paths.extend(paths)
+    
+    return sum,ret_paths
+
+money.list = []
+
+
+
+def main_money():
+    
+    ret = money(10)
+
+    for c in ret:
+        print c
+    
 
 """
 9.9 Write an algorithm to print all ways of arranging eight queens on an 8x8 chess
-board sothat none of them share the same row, column or diagonal. In this case,
+board so that none of them share the same row, column or diagonal. In this case,
 "diagonal" means all diagonals, not just the two that bisect the board.
 """
+import numpy as np
+                
+def check_valid(rows, row_num, i):
+    for r,c in enumerate(rows):
+        if c != -1:
+            if row_num == r or i == c:
+                return False
+            #check diagonal
+            #x+y=c
+            if r+c == row_num+i:
+                return False
+            elif r-c == row_num-i:
+                return False
+    
+    return True
+            
+
+
+def chessboard2(q_num, rows, result):
+    dim = len(rows)
+    if q_num == 0:
+        result.append(rows)
+        return
+    
+    row_num = q_num-1
+    
+    # i : column
+    for col in range(dim):
+        if check_valid(rows, row_num, col):
+            new_rows = list(rows)
+            new_rows[row_num]=col
+            chessboard2(q_num-1,new_rows, result )
+    
+    
+    
+                
+def main_chessboard():
+    result = []
+    q_num = 8
+    rows = np.zeros(q_num, dtype='i1')
+    rows[:] = -1
+    print rows
+    chessboard2(q_num, rows, result)
+
+    print "--------------------------"
+    for id,record in enumerate(result):
+        print id,"-----"
+        dim = len(record)
+        for i in range(dim):
+            c = record[i]
+            for j in range(dim):
+                if j == c:
+                    print "O",
+                else:
+                    print ".",
+            print ""
+        
+    
+                
+                    
+            
+    
+    
+
 
 """
-9.10 You have a stack of n boxes,with widths w., heights hir and depths drTheboxes
+9.10 You have a stack of n boxes,with widths wi, heights hi, and depths di.The boxes
 cannot be rotated and can only be stacked on top of one another if each box
 in the stack is strictly larger than the box above it in width, height, and depth.
 Implement a method to build the tallest stack possible, where the height of a
 stack is the sum of the heights of each box
 """
+class box(object):
+    def __init__(self, w, h, d):
+        self.w = w
+        self.h = h 
+        self.d = d 
+        
+    def is_Larger_than(self, other):
+        if self.w > other.w and self.h > other.h and self.d > other.d:
+            return True
+        else:
+            return False
+        
+        
+def find_max_height(stack, boxes):
+    
+    max_height = 0
+    max_stack = []
+    for i,box in enumerate(boxes):
+        if stack == [] or stack[-1].is_Larger_than(box):
+            new_stack = list(stack)
+            new_boxes = list(boxes)
+            new_stack.append(box)
+            del new_boxes[i]
+            hight, result_stack = find_max_height(new_stack, new_boxes)
+            if hight > max_height:
+                max_height = hight
+                max_stack = result_stack
+                
+    if max_height == 0: # no further more
+        sum_h = 0
+        for box in stack:
+            sum_h += box.h
+        return sum_h, stack
+                
+    return max_height, max_stack
+    
+                
+def main_find_max_height():
+    
+    boxes = [
+        box(5,5,5),
+        box(4,4,4),
+        box(3,3,3),
+        box(10,10,10),
+        box(5,3,5),
+        ]
+    
+    hight, stack = find_max_height([], boxes)
+    
+    print hight
+    
+    for b in stack:
+        print "(%d,%d,%d)"%(b.w,b.h,b.d),
+    
+    
+            
+        
+
 
 """
 9.11 Given a boolean expression consisting of the symbols 0,1, &, |, and A, and a
 desired boolean result value result,implement afunction to count the number
 of ways of parenthesizing the expressionsuch that it evaluatesto result.
 EXAMPLE
-Expression:1A01011
+Expression:1^0|0|1
 Desired result: false (0)
-Output: 2ways. 1A((010) 11) and1A(91 (011)).
+Output: 2ways. 1^((0|0)|1) and 1^(0|1(0|1)).
 """
 
 
@@ -393,7 +651,12 @@ if __name__ == "__main__":
 #     main_find_magic()
 #     main_all_subset()
 #     main_permutate_str()
-    main_parentheses()
+#     main_parenthesis()
+#     main_paint_fill()
+#     main_money()
+#     main_chessboard()
+    main_find_max_height()
+
     
     
     print "Done"
