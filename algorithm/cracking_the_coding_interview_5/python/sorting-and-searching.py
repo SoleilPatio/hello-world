@@ -492,6 +492,53 @@ Input (ht,wt): (65, 100) (70, 150) (56, 90) (75, 190) (60, 95)
 Output:The longest tower is length 6 and includes from top to bottom:
 (56, 90) (60,95) (65,100) (68,110) (70,150) (75,190)
 """
+class people(object):
+    def __init__(self, h, w):
+        self.h = h 
+        self.w = w 
+    def is_smaller_than(self, other):
+        if self.w < other.w and self.h < other.h:
+            return True
+        return False
+
+
+def find_largest_tower(current_path, remain_ppl):
+    
+    b_new_top_found = False
+    for index, ppl in enumerate(remain_ppl):
+        if current_path == [] or ppl.is_smaller_than(current_path[-1]):
+            b_new_top_found = True
+            new_remain_ppl = list(remain_ppl)
+            del new_remain_ppl[index]
+            new_current_path = list(current_path)
+            new_current_path.append(ppl)
+            find_largest_tower(new_current_path, new_remain_ppl )
+    
+    if b_new_top_found== False:
+        current_length = len(current_path)
+        if current_length > find_largest_tower.max_length:
+            find_largest_tower.max_length = current_length
+            find_largest_tower.max_path = current_path
+    
+    return (find_largest_tower.max_length, find_largest_tower.max_path)
+    
+find_largest_tower.max_length = 0
+find_largest_tower.max_path = []
+
+
+
+def main_find_largest_tower():
+    remain_ppl = [
+        people(65, 100), people(70, 150), people(56, 90), people(75, 190), people(60, 95), people(68, 110)
+        ]
+    
+    max, path = find_largest_tower([], remain_ppl)
+    
+    print max
+    for ppl in reversed(path):
+        print "(%d,%d)" % (ppl.h,ppl.w),
+        
+    print ""
 
 """
 11.8 Imagine you are readingin a stream of integers.Periodically, you wish to beable
@@ -507,6 +554,92 @@ getRankOfNumber(3) = 1
 getRankOfNumber(4) = 3
 """
 
+class bstree(object):
+    def __init__(self, data=None):
+        self.data = data
+        self.left_child_count = 0
+        self.left = None
+        self.right = None
+        
+    def add(self, x):
+        if self.data == None:
+            self.data = x
+            return
+        
+        if x > self.data:
+            if self.right == None:
+                self.right = bstree(x)
+            else:
+                self.right.add(x)
+        else:
+            self.left_child_count += 1
+            if self.left == None:
+                self.left = bstree(x)
+            else:
+                self.left.add(x)
+            
+    def getRankOfNumber(self,x):
+        if x > self.data:
+            if self.right != None:
+                return (self.left_child_count + 1) + self.right.getRankOfNumber(x)
+            else:
+                return -1
+        elif x == self.data:
+            return self.left_child_count
+        else:
+            if self.left != None:
+                return self.left.getRankOfNumber(x)
+            
+    def show(self):
+        import collections
+        queue = collections.deque()
+        
+        
+        level = 0
+        last_level = level
+        queue.append((level,self))
+        while queue:
+            level, node = queue.popleft()
+            if last_level != level:
+                print ""
+            if node == None:
+                print "X",
+                last_level = level
+                continue
+                
+            else:
+                print node.data,"(%d)"%node.left_child_count,
+            
+            queue.append((level+1,node.left))
+            queue.append((level+1,node.right))
+            last_level = level
+                
+            
+        print ""
+        
+            
+            
+            
+            
+def main_bstree():
+    tree = bstree()
+    stream = [5, 1, 4, 4, 5, 9, 7, 13, 3]
+    
+    for n in stream:
+        tree.add(n)
+        
+    tree.show()
+    
+    print tree.getRankOfNumber(1)
+    print tree.getRankOfNumber(3)
+    print tree.getRankOfNumber(4)
+    print tree.getRankOfNumber(13)
+               
+        
+        
+        
+        
+
 
 if __name__ == "__main__":
 #     main_bubble_sort()
@@ -517,6 +650,8 @@ if __name__ == "__main__":
 #     main_merge_sorted_array()
 #     main_sort_anagram_strings()
 #     main_bin_search_string()
-    main_search_matrix()
+#     main_search_matrix()
+#     main_find_largest_tower()
+    main_bstree()
     
     print "\nDone!"
