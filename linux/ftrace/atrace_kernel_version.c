@@ -1,4 +1,17 @@
 #define DEFAULT_POLLING_PERIOD_NS (1000000)
+/*
+ * [CLS]:
+ * 		1. fetch buffer by:
+ * 				adb shell atrace -s -w -t 100
+ * 				or
+ * 				systrace.py ==> to generate .html viewed by Chrome
+ *
+ * 		2. nothing at (donno why)
+ * 				cat /sys/kernel/debug/tracing/trace
+ *
+ *
+ */
+
 
 /*
  * mini trace system
