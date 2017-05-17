@@ -78,6 +78,8 @@ void main(void)
 
 /**********************************************************************************************/
 /* 底下別種簡單做法
+ * 適用於實作簡單的開關
+ */
 /**********************************************************************************************/
 /*
  * [CLS]: alternative usage
@@ -116,6 +118,24 @@ DEFINE_SIMPLE_ATTRIBUTE(user2_fops, user2_get, user2_set, "%llu\n"); /*[CLS]: fm
  * >>>>>
  *
  */
+
+
+void main2(void)
+{
+	struct dentry *debug_root;
+
+	debug_root = debugfs_create_dir("my_group", NULL); /*==>create  /sys/kernel/debug/my_group/  */
+	if (IS_ERR_OR_NULL(debug_root))
+		LOG_ERR("Error!");
+
+	/*
+	 * [CLS]: 記得Create File
+	 *
+	 */
+	debug_file = debugfs_create_file("user", 0644, debug_root, (void*) NULL, &user2_fops); /*==>create  /sys/kernel/debug/my_group/user  */
+	if (IS_ERR_OR_NULL(debug_file))
+		LOG_ERR("Error!");
+}
 
 
 

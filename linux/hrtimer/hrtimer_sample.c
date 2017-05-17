@@ -68,3 +68,9 @@ int init_vpu_profile_timer(void) {
 	return 0;
 
 }
+
+void stop_hrtimer(void)
+{
+
+	hrtimer_cancel(hr_timer);
+}
