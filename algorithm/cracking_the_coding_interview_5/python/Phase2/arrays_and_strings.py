@@ -71,12 +71,69 @@ def main_check_string_unique_char():
 1.2 Implement a function void reverse(char* str) in C or C++ which reverses a null-
 terminated string.
 """
+def reverse_string(strarr):
+    count = len(strarr)
+    
+    for i in range(count):
+        j = count-1-i
+        if i >= j:
+            break
+        temp = strarr[i]
+        strarr[i] = strarr[j]
+        strarr[j] = temp
+    
+    return strarr
+
+def main_reverse_str():
+    strarr = list("I am Clouds. How are You?!")
+    print "".join(strarr),"==>",
+    print "".join(reverse_string(strarr))
         
         
 """
 1.3 Given two strings, write a method to decide if one is a permutation of the other.
 """
+def check_permutation(str1, str2):
+    result = True
+    map1 = {}
+    map2 = {}
+    for c in str1:
+        if c in map1:
+            map1[c] += 1
+        else:
+            map1[c] = 1
+            
+    for c in str2:
+        if c in map2:
+            map2[c] += 1
+        else:
+            map2[c] = 1
+    
+    kcount1 = len(map1.keys())
+    kcount2 = len(map2.keys())
+    
+    if kcount1 != kcount2:
+        result = False
+    else:
+        for k in map1:
+            value2 = map2.get(k, None)
+            if value2 != map1[k]:
+                result = False
+                break
+            
+    
+    print "\"",str1, "\"", "%s"%"is" if result else "is NOT", "a permutation of", "\"",str2, "\""
+                
 
+def main_check_permutation():
+    check_permutation("clouds", "sdoucl")
+    check_permutation("i am busy", "busy am i")
+    check_permutation("abba", "bbff")
+    
+    
+    
+    
+    
 
 """
 1.4 Write a method to replace all spaces in a string with'%20'. You may assume that
@@ -122,6 +179,8 @@ using only one call to isSubstring (e.g., "waterbottLe" is a rotation of "erbott
 
 if __name__ == "__main__":
     main_check_string_unique_char()
+    main_reverse_str()
+    main_check_permutation()
     
     
     print "\nDone!"

@@ -3,7 +3,7 @@
 #include <mt-plat/met_drv.h>
 
 /*your ftrace event difinition header file*/
-/*[CLS]: 
+/*[CLS]:
 	1st. define CREATE_TRACE_POINTS
 	2nd. then include "sample_event.h" to create trace point functions
 
@@ -31,6 +31,18 @@ static void sample_polling1(unsigned long long stamp, int cpu)
 
 	met_tag_oneshot(0, "vpu-polling1", 1);
 	met_tag_oneshot(0, "vpu-polling1", 0);
+
+
+	/*Check if ftrace option on*/
+	/*
+	 * [CLS]:
+	 * 	1.define in /kernel-4.4/include/linux/tracepoint.h
+	 * 	2.document : /Documentation/trace/tracepoints.txt
+	 *
+	 */
+	if(trace_sample_tracing_enabled()){
+		/*Do something*/
+	}
 
 }
 
