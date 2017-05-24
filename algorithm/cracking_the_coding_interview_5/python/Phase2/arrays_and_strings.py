@@ -145,14 +145,93 @@ EXAMPLE
 Input: "Mr John Smith
 Output: "Mr%20Dohn%20Smith"
 """
-  
+def encode_string(strarr):
+    space_count = 0
+    len_count = 0
+    for c in strarr:
+        len_count += 1
+        if c == " ":
+            space_count += 1
+        if c == "":
+            break
+    
+    total_count = len_count + space_count*2
+    print len_count
+    print total_count;
+    
+    rp = len_count-1
+    wp = total_count-1
+    while rp >0 and wp > 0 and rp != wp:
+        if(strarr[rp]==" "):
+            strarr[wp]="0"
+            wp-=1
+            strarr[wp]="2"
+            wp-=1
+            strarr[wp]="%"
+            wp-=1
+        else:
+            strarr[wp] = strarr[rp]
+            wp -= 1
+
+        rp -= 1
+        
+    return strarr
+        
+
+
+def main_encode_string():
+    import numpy as np
+    str = "Mr John Smith"
+    strarr = np.zeros(len(str)*3, dtype="c")
+    strarr[0:len(str)] = list(str)
+    
+    print strarr
+    print "".join(encode_string(strarr))
+    
             
 """
+[CLS]: string += sub_string ==> memory copy O(n)
+     use list.append() to do this with O(1)
  1.5 Implement a method to perform basic string compression using the counts
 of repeated characters. For example, the string aabcccccaaa would become
 a2blc5a3. If the "compressed" string would not become smaller than the original
 string, your method should return the original string.
 """
+def compress_str(string):
+    origin_len = len(string)
+    
+    re_string = ""
+    
+    last_c = None
+    c_count = 0
+    for i,c in enumerate(string):
+        if ( c != last_c and last_c != None):
+            re_string += last_c
+            re_string += str(c_count)
+            last_c = c
+            c_count = 1
+        elif i == origin_len-1:
+            re_string += c
+            re_string += str(c_count+1)
+            
+        else:
+            last_c = c
+            c_count += 1
+            
+    new_len = len(re_string)
+    
+    if new_len < origin_len:
+        return re_string
+    else:
+        return string
+    
+def main_compress_str():
+    print  compress_str("aabcccccaaa")
+            
+            
+            
+        
+    
 
 
 """
@@ -161,6 +240,7 @@ string, your method should return the original string.
 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
 place?
 """
+
 
 
 
@@ -178,9 +258,15 @@ using only one call to isSubstring (e.g., "waterbottLe" is a rotation of "erbott
 
 
 if __name__ == "__main__":
-    main_check_string_unique_char()
-    main_reverse_str()
-    main_check_permutation()
+#     main_check_string_unique_char()
+#     main_reverse_str()
+#     main_check_permutation()
+#     main_encode_string()
+    main_compress_str()
+    
+
+    
+    
     
     
     print "\nDone!"
