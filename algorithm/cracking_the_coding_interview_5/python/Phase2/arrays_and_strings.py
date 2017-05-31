@@ -240,7 +240,64 @@ def main_compress_str():
 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
 place?
 """
+def overwrite_index(i, j, N):
+    return ( j, N-1-i)
+    
+    
+def rotate_matrix(mat, level=0):
+    N,N = mat.shape
+    if level > N/2-1:
+        return
+    
+    range_n = N-2*level
+    
+    for i in range(range_n-1):
+        cx , cy = ( 0, i)
+        #backup
+        temp = mat[cx+level][cy+level]
+        #L->U
+        (nx,ny) = overwrite_index(cx,cy,range_n)
+        mat[cx+level][cy+level] = mat[nx+level][ny+level]
+        print cx,cy,nx,ny
+        #B->L
+        cx, cy = nx, ny
+        (nx,ny) = overwrite_index(cx,cy,range_n)
+        mat[cx+level][cy+level] = mat[nx+level][ny+level]
+        print cx,cy,nx,ny
+        #R->B
+        cx, cy = nx, ny
+        (nx,ny) = overwrite_index(cx,cy,range_n)
+        mat[cx+level][cy+level] = mat[nx+level][ny+level]
+        print cx,cy,nx,ny
+        #U->R
+        cx, cy = nx, ny
+        (nx,ny) = overwrite_index(cx,cy,range_n)
+        mat[cx+level][cy+level] = temp
+        print cx,cy,nx,ny
+        
+        print mat
+        
+    rotate_matrix(mat, level+1)
+    
+    
+        
+def main_rotate_matrix():
+    import numpy as np
+    mat = np.zeros((5,5),dtype="i4")
 
+    mat = np.array( [[1, 2, 3, 4, 5],
+                     [6, 7, 8, 9, 10],
+                     [11, 12, 13, 14, 15],
+                     [16, 17, 18, 19, 20],
+                     [21,22,23,24,25]] )
+
+    
+
+    print mat
+    rotate_matrix(mat)
+    print "====>"
+    print mat
+        
 
 
 
@@ -263,7 +320,8 @@ if __name__ == "__main__":
 #     main_reverse_str()
 #     main_check_permutation()
 #     main_encode_string()
-    main_compress_str()
+#     main_compress_str()
+    main_rotate_matrix()
     
 
     
