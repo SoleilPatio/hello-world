@@ -11,6 +11,24 @@ Input: N = 10000000000, M = 10011, i = 2, j = 6
 Output: N = 10001001100
 """
 
+def insert(N, M, i, j):
+    ret = ( 0xFFFFFFFF & ~((1 << (j+1))-1) ) | ((1<<(i+1))-1)
+    print bin(ret)
+    
+    ret = N & ret
+    print bin(ret)
+    
+    ret = ret | (M << i)
+    print bin(ret)
+    
+    return ret
+    
+def main_insert():
+    ret = insert( 0b10000000000, 0b10011, 2, 6)
+    
+    print bin(ret)
+    
+
 
 """
 5.2 Given a real number between 0 and 1 (e.g., 0.72) that is passed in as a double,
@@ -61,3 +79,9 @@ can be derived from the length of the array and the width. Implement a function
 drawHorizontall_ine(byte[] screen, int width, int x1, int x2,
 int y) which draws a horizontal line from (x1, y)to(x2, y).
 """
+
+
+if __name__ == "__main__":
+    main_insert()
+    
+    print "\nDone"
