@@ -4,6 +4,131 @@
 FOLLOW UP
 How would you solve this problem if a temporary buffer is not allowed?
 """
+class Node(object):
+    def __init__(self, data = None):
+        self.data = data
+        self.next = None
+        self.last = self
+        
+    def append(self, data):
+        new_node = Node(data)
+        
+        current = self.last
+        while current.next != None:
+            current = current.next
+        current.next = new_node
+        self.last = new_node
+        
+    def show(self):
+        p = self
+        
+        while p:
+            print p.data, "->",
+            p = p.next
+        print "nil"
+        
+        
+
+def bubblesort_ll(head_node):
+    
+    bSwap = False
+    prev_node = head_node
+    current_node = head_node.next if head_node != None else None
+    next_node = current_node.next if current_node != None else None
+    nextnext_node = next_node.next if next_node != None else None
+    
+    while True:
+        while next_node:
+            if current_node.data > next_node.data:
+                #swap
+                bSwap = True
+                prev_node.next = next_node
+                next_node.next = current_node
+                current_node.next = nextnext_node
+                #update
+                prev_node = next_node
+                next_node = nextnext_node
+                nextnext_node = nextnext_node.next if nextnext_node != None else None
+                
+            else:
+                #update
+                prev_node = current_node
+                current_node = next_node
+                next_node = nextnext_node
+                nextnext_node = nextnext_node.next if nextnext_node != None else None
+                
+            head_node.show()
+            
+                
+        if bSwap == False:
+            break
+        #prepare next loop
+        bSwap = False
+        prev_node = head_node
+        current_node = head_node.next if head_node != None else None
+        next_node = current_node.next if current_node != None else None
+        nextnext_node = next_node.next if next_node != None else None
+        
+        
+def remove_sorted_list(head):
+    
+    prev_n = head
+    curr_n = prev_n.next if prev_n else None
+    next_n = curr_n.next if curr_n else None
+    
+    while curr_n:
+        if prev_n.data == curr_n.data:
+            #remove curren_n
+            prev_n.next = next_n
+            #update
+            curr_n = prev_n.next if prev_n else None
+            next_n = curr_n.next if curr_n else None
+        else:
+            prev_n = curr_n
+            curr_n = prev_n.next if prev_n else None
+            next_n = curr_n.next if curr_n else None
+        head.show()
+            
+        
+                
+        
+def main_remove_duplicate():
+    head = Node()
+    head.append(5)
+    head.append(6)
+    head.append(1)
+    head.append(8)
+    head.append(3)
+    head.append(3)
+    head.append(0)
+    head.append(8)
+    head.append(5)
+    head.append(6)
+    head.append(1)
+    head.append(8)
+    head.show()
+    
+    bubblesort_ll(head)
+    print "Sorted:"
+    head.show()
+    remove_sorted_list(head)
+    print "Removed:"
+    head.show()
+    
+    
+    
+    
+                
+                
+                
+                
+                
+                
+        
+    
+    
+    
+    
 
 
 """
@@ -61,3 +186,9 @@ Output: C
 """
 2.7 Implement a function to check if a linked list is a palindrome
 """
+
+
+
+
+if __name__ == "__main__":
+    main_remove_duplicate()
