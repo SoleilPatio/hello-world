@@ -69,6 +69,109 @@ def bubblesort_ll(head_node):
         next_node = current_node.next if current_node != None else None
         nextnext_node = next_node.next if next_node != None else None
         
+def selection_sort_ll(head):
+    
+    pc = head
+    c  = pc.next if pc else None
+    nc = c.next if c else None
+    
+    while c:
+        ps = head
+        s  = ps.next if ps else None
+        ns = s.next if s else None
+        
+        b_insert = False
+        while s != c and s != None:
+            if c.data < s.data:
+                b_insert = True
+                #insert
+                pc.next = nc
+                ps.next = c
+                c.next = s
+                #update
+                c = nc
+                nc = c.next if c else None
+                head.show()
+                break
+            else:
+                ps = s
+                s  = ps.next if ps else None
+                ns = s.next if s else None
+        
+        #advance c
+        if b_insert == False:
+            pc = c
+            c  = pc.next if pc else None
+            nc = c.next if c else None
+        
+                 
+def merge(left,right):
+    
+    head = Node()
+    
+    phead = head
+    pleft = left.next
+    pright = right.next
+    while True:
+        if pleft and pright:
+            if pleft.data < pright.data:
+                phead.next = pleft
+                pleft = pleft.next
+                phead = phead.next
+                phead.next = None
+            else:
+                phead.next = pright
+                pright = pright.next
+                phead = phead.next
+                phead.next = None
+        elif pleft == None and pright == None:
+            return head
+        elif pleft == None and pright != None:
+            phead.next = pright
+            return head
+        elif pright == None and pleft != None:
+            phead.next = pleft
+            return head
+            
+    return head
+                
+                
+        
+    
+    
+    
+    
+    
+def merge_sort_ll(head):
+    if head.next == None:
+        return
+    if head.next.next == None:
+        return
+    
+    
+    slow = head
+    fast = head
+    
+    while fast != None and fast.next != None:
+        slowprv = slow
+        slow = slow.next
+        fast = fast.next.next
+        
+    left = head
+    right = Node()
+    right.next = slow.next
+    slow.next = None
+    
+   
+    
+    merge_sort_ll(left)
+    merge_sort_ll(right)
+    
+    new_head = merge(left,right)
+    head.next = new_head.next
+    
+    
+    
         
 def remove_sorted_list(head):
     
@@ -108,7 +211,9 @@ def main_remove_duplicate():
     head.append(8)
     head.show()
     
-    bubblesort_ll(head)
+#     bubblesort_ll(head)
+#     selection_sort_ll(head)
+    merge_sort_ll(head)
     print "Sorted:"
     head.show()
     remove_sorted_list(head)
