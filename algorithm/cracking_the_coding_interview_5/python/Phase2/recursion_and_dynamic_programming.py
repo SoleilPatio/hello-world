@@ -40,7 +40,43 @@ def main_list_fibo():
 9.1 A child is running up a staircase with n steps,and can hop either 1 step, 2 steps,
 or 3 steps at a time. Implement a method to count how many possible ways the
 child can run up
+[CLS]:"step" parameter is no need
 """
+def count_step(total,step=0):
+    
+    if total == 0:
+        return 1
+    elif total < 0:
+        return 0
+    
+    if (total, step) in count_step.cached:
+        return count_step.cached[(total, step)]
+    
+    if (total-1, 1) in count_step.cached:
+        c1 = count_step.cached[(total-1, 1)]
+    else:
+        c1 = count_step(total-1, 1)
+    
+    if (total-2, 2) in count_step.cached:
+        c2 = count_step.cached[(total-2, 2)]
+    else:
+        c2 = count_step(total-2, 2)
+        
+    if (total-3, 3) in count_step.cached:
+        c3 = count_step.cached[(total-3, 3)]
+    else:
+        c3 = count_step(total-3, 3)
+        
+    count = c1 + c2 + c3
+    count_step.cached[(total, step)] = count
+    
+    return count
+
+count_step.cached = {}
+
+
+def main_count_step():
+    print count_step(10)
 
     
 """
@@ -125,6 +161,7 @@ Output: 2ways. 1^((0|0)|1) and 1^(0|1(0|1)).
 
 
 if __name__ == "__main__":
-    main_list_fibo()
+#     main_list_fibo()
+    main_count_step()
     
     print "\nDone"

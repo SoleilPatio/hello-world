@@ -61,6 +61,93 @@ def main_merge_ab():
 11.2 Write a method to sort an array of strings so that all the anagrams are next to
 each other.
 """
+def compare_str(ls,rs):
+    sl = "".join(sorted(ls))
+    sr = "".join(sorted(rs))
+    
+    if sl < sr:
+        return -1
+    elif sl == sr:
+        return 0
+    else:
+        return 1
+    
+    
+    
+
+def merge(left,right):
+    ret = []
+    
+    
+    cl = len(left)
+    cr = len(right)
+    
+    if cl == 0:
+        return right
+    elif cr == 0:
+        return left
+    
+    il = 0
+    ir = 0
+    while True:
+        ls = left[il]
+        rs = right[ir]
+        
+        cmp = compare_str(ls,rs)
+        
+        if cmp <= 0:
+            ret.append(ls)
+            il += 1
+        else:
+            ret.append(rs)
+            ir += 1
+            
+        if il >= cl:
+            ret.extend(right[ir:])
+            return ret
+        if ir >= cr:
+            ret.extend(left[il:])
+            return ret
+        
+        
+        
+    
+    
+def merge_sort_str(str_list):
+    
+    mid = len(str_list)/2
+    
+    print mid,
+    print str_list
+    
+    if mid == 0:
+        return str_list
+    
+   
+    
+    left = merge_sort_str(str_list[0:mid])
+    right = merge_sort_str(str_list[mid:])
+
+    
+    ret_list = merge(left,right)
+    return ret_list
+
+
+
+def main_sort_str():
+    str_list = [
+        "abcde",
+        "12345",
+        "xyzza",
+        "zxyaz",
+        "53421",
+        "bcdae"
+        ]
+    
+    ret = merge_sort_str(str_list)
+    
+    print ret
+    
 
 
 """
@@ -122,8 +209,24 @@ getRankOfNumber(l) = 0
 getRankOfNumber(3) = 1
 getRankOfNumber(4) = 3
 """
-
+def modify(list):
+    for i,data in enumerate(list):
+        list[i] = "X"
+        
+    
+    
 if __name__ == "__main__":
-    main_merge_ab()
+#     main_merge_ab()
+#     main_sort_str()
+
+    list = [0,1,2,3,4,5,6,7]
+    print list[5:]
+    modify(list[5:])
+    print list
+    modify(list)
+    print list
+    
+    list[5:] = [9,9,9]
+    print list
     
     print "\nDone"
