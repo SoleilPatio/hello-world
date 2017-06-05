@@ -7,6 +7,88 @@ this question, a balanced tree is defined to be a tree such that the heights of 
 two subtrees of any node never differ by more than one.
 """
 
+class tree41(object):
+	def __init__(self, data = None):
+		self.data = data
+		self.left = None
+		self.right = None
+		
+	def add(self,data):
+		if self.data == None:
+			self.data = data
+		else:
+			if data <= self.data:
+				if self.left == None:
+					self.left = tree41(data)
+				else:
+					self.left.add(data)
+			else:
+				if self.right == None:
+					self.right = tree41(data)
+				else:
+					self.right.add(data)
+	
+	def show(self):
+		import collections
+		QQ = collections.deque()
+		
+		level = 0
+		QQ.append((level,self))
+		last_level = level
+		while QQ:
+			level,node = QQ.popleft()
+			
+			if last_level != level:
+				print ""
+			last_level = level
+				
+			print node.data if node else "X",
+			
+			if node:
+				QQ.append((level+1,node.left))
+				QQ.append((level+1,node.right))
+
+			
+def check_tree_balance(root):
+	if root == None:
+		return 0, True
+	
+	
+	left, lret = check_tree_balance(root.left)
+	right, rret = check_tree_balance(root.right)
+	
+	if abs(left-right) > 1:
+		return max(left,right)+1,False
+	else:
+		return max(left,right)+1,True
+	
+	
+def main_check_balance():
+	nums = [4,2,6,1,3,5,7,7,7,7]
+	root = tree41()
+	for n in nums:
+		root.add(n)
+		
+	root.show()
+	
+	print "\n",check_tree_balance(root)
+		
+	
+	
+	
+	
+	
+			
+		
+			
+		
+		
+		
+				 	
+		
+		
+
+
 
 """
 4.2 Given a directed graph, design an algorithm to find out whether there is a route
@@ -81,3 +163,8 @@ Output : Root of below tree
     \
       8
 """
+
+if __name__ == "__main__":
+	main_check_balance()
+	
+	print "Done\n"

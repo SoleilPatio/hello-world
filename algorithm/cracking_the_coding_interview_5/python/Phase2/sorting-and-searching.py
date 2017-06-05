@@ -22,6 +22,37 @@ Radix sort
 11.1 You are given two sorted arrays, A and B,where A has a large enough buffer at
 the end to hold B. Write a method to merge B into A in sorted order.
 """
+import numpy as np
+def merge_ab(A,sizea,B,sizeb):
+    i_last = sizea + sizeb - 1
+    i_a = sizea-1
+    i_b = sizeb-1
+    
+    while i_a > 0 and i_b > 0:
+        if A[i_a] > B[i_b]:
+            A[i_last] = A[i_a]
+            i_a -= 1
+            i_last -= 1
+        else:
+            A[i_last] = B[i_b]
+            i_b -= 1
+            i_last -= 1
+            
+            
+def main_merge_ab():
+    sizea = 10
+    sizeb = 5
+    A = np.zeros(sizea+sizeb)
+    A[:sizea] = sorted(np.random.randint(100,size=sizea))
+    B = np.zeros(sizeb)
+    B[:sizeb] = sorted(np.random.randint(100,size=sizeb))
+    
+    print "A=",A
+    print "B=",B
+    merge_ab(A,sizea,B,sizeb)
+    print "A=",A
+    print "B=",B
+    
 
     
 
@@ -91,3 +122,8 @@ getRankOfNumber(l) = 0
 getRankOfNumber(3) = 1
 getRankOfNumber(4) = 3
 """
+
+if __name__ == "__main__":
+    main_merge_ab()
+    
+    print "\nDone"

@@ -3,11 +3,93 @@
 """
 
 """
+[REDO]
 3.2 How would you design a stack which, in addition to push and pop, also has a
 function min which returns the minimum element? Push, pop and min should
 all operate in O(1) time.
 """
-
+class MinStack(object):
+    def __init__(self):
+        self.minstack = []
+        self.mainstack = []
+        
+    def Push(self,data):
+        if len(self.mainstack) > 0:
+            min = self.minstack[-1]
+            self.mainstack.append(data)
+            if data <= min:
+                self.minstack.append(self.mainstack[-1])
+                
+        else:
+            self.mainstack.append(data)
+            self.minstack.append(self.mainstack[-1])
+            
+                
+    def Pop(self):
+        if len(self.mainstack) == 0:
+            return None
+        
+        min = self.minstack[-1]
+        ret = self.mainstack[-1]
+        
+        if min == ret:
+            del self.minstack[-1]
+        
+        del self.mainstack[-1]
+        return ret
+    
+    def Min(self):
+        if len(self.mainstack) == 0:
+            return None
+        
+        return self.minstack[-1]
+    
+    def Show(self):
+        print "Stack:", self.mainstack
+        print "Min:", self.Min()
+        
+        
+def main_minstack():
+    stack = MinStack()
+    
+    stack.Push(5)
+    stack.Show()
+    stack.Push(6)
+    stack.Show()
+    stack.Push(3)
+    stack.Show()
+    stack.Push(2)
+    stack.Show()
+    stack.Push(1)
+    stack.Show()
+    stack.Push(10)
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+    stack.Push(4)
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+    stack.Push(3)
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+    stack.Pop()
+    stack.Show()
+        
+            
+        
+        
+        
+        
         
             
         
@@ -60,3 +142,8 @@ specific animal they would like. Create the data structures to maintain this sys
 and implement operations such as enqueue, dequeueAny, dequeueDog and
 dequeueCat.You may use the built-in LinkedList data structure.
 """
+
+if __name__ == "__main__":
+    main_minstack()
+    
+    print "\nDone"

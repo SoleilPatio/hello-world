@@ -223,15 +223,6 @@ def main_remove_duplicate():
     
     
     
-                
-                
-                
-                
-                
-                
-        
-    
-    
     
     
 
@@ -239,7 +230,40 @@ def main_remove_duplicate():
 """
 2.2 Implement an algorithm to find the kth to last element of a singly linked list.
 """
+def find_last_k_helper(listhead, k, rank_from_start = 1):
+    
+    if listhead==None:
+        return 0, None
+    
+    brank, ret = find_last_k_helper(listhead.next,k, rank_from_start+1)
+    brank += 1
+    if brank == k:
+        return brank,  listhead.data
+    else:
+        return brank, ret
+    
 
+
+def main_find_last_k():
+    head = Node()
+    head.append(5)
+    head.append(6)
+    head.append(1)
+    head.append(8)
+    head.append(3)
+    head.append(3)
+    head.append(0)
+    head.append(8)
+    head.append(5)
+    head.append(6)
+    head.append(1)
+    head.append(8)
+    head.show()
+    
+    l, ret = find_last_k_helper(head, 4)
+    print ret
+    
+    
 
 """
 2.3 Implement an algorithm to delete a node in the middle of a singly linked list,
@@ -296,4 +320,5 @@ Output: C
 
 
 if __name__ == "__main__":
-    main_remove_duplicate()
+#     main_remove_duplicate()
+    main_find_last_k()

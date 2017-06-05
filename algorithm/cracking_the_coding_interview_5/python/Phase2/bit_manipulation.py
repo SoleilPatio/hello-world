@@ -35,6 +35,30 @@ def main_insert():
 print the binary representation. If the number cannot be represented accurately
 in binary with at most 32 characters, print "ERROR."
 """
+def show_binary(realnum):
+    
+    rep = []
+    for i in range(1,33):
+        div = (1.0/2)**i
+        if realnum >= div:
+            rep.append("1")
+            realnum -= div
+        else:
+            rep.append("0")
+        if realnum <= 0:
+            break
+    
+    return "b0." + "".join(rep)
+
+
+def main_show_binary():
+    print show_binary(0.75)
+            
+            
+
+        
+        
+    
 
 
 """
@@ -82,6 +106,7 @@ int y) which draws a horizontal line from (x1, y)to(x2, y).
 
 
 if __name__ == "__main__":
-    main_insert()
+#     main_insert()
+    main_show_binary()
     
     print "\nDone"

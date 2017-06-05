@@ -2,9 +2,54 @@
 generate prime numbers
 sieve Of Eratosthenes
 """
+def list_prime(max_number):
+    import math
+    ret = []
+    
+    for i in range(2, max_number + 1):
+        b_found = False
+        for j in ret:
+            if j > math.sqrt(i):
+                break
+            if i%j == 0:
+                b_found = True
+                break
+        if b_found == False:
+            ret.append(i)
+    return ret
+
+def main_list_prime():
+    print list_prime(1000)
+        
+        
+def show_factors(num):
+    import math
+    ret = []
+    prim_list = list_prime(int(math.sqrt(num)))
+    print prim_list
+    remain_num = num
+    while remain_num:
+        root = math.sqrt(remain_num)
+        print "remain_num = ", remain_num,"root = ",root
+        for i in prim_list:
+            print "try i:", i
+            if i > root:
+                ret.append(remain_num)
+                return ret
+            else:
+                if remain_num % i == 0:
+                    ret.append(i)
+                    remain_num = remain_num/i
+                    break
+    return ret
+            
+            
+def main_show_factors():
+    print show_factors(84)
 
 
 """
+[REDO]
 7.1 You have a basketball hoop and someone says that you can play one of two
 games.
 Game 1: You get one shot to make the hoop.
@@ -15,6 +60,8 @@ you pick one game or the other
 """
 p >? 3p^2 - 2p^3
 """
+
+"""math calculation"""
 
 """
 7.2 There are three ants on different vertices of a triangle. What is the probability of
@@ -52,3 +99,9 @@ most number of points.
 7.7 Design an algorithm to find the kth number such that the only prime factors are
 3,5, and 7.
 """
+
+if __name__ == "__main__":
+#     main_list_prime()
+    main_show_factors()
+    
+    print "\nDone!"

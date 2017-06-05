@@ -306,6 +306,44 @@ def main_rotate_matrix():
 1.7 Write an algorithm such that if an element in an MxN matrix is 0, its entire row
 and column are set to 0.
 """
+def clear_matrix(mat):
+    M,N = mat.shape
+    
+    r_list = []
+    c_list = []
+    
+    for r in range(M):
+        for c in range(N):
+            item = mat[r][c]
+            if item == 0:
+                r_list.append(r)
+                c_list.append(c)
+    
+    for r in r_list:
+        for c in range(N):
+            mat[r][c] = 0
+        
+    for c in c_list:
+        for r in range(M):
+            mat[r][c] = 0
+            
+        
+def main_clear_mat():
+    import numpy as np
+    
+    mat = np.array(
+        [[0,1,2,3,4,5],
+        [1,1,2,3,4,5],
+        [1,1,0,3,4,5],
+        [1,1,2,3,4,5],
+        [1,1,2,3,0,5]]
+        )
+    
+    print mat
+    clear_matrix(mat)
+    print mat 
+    
+    
 
 
 """
@@ -321,7 +359,8 @@ if __name__ == "__main__":
 #     main_check_permutation()
 #     main_encode_string()
 #     main_compress_str()
-    main_rotate_matrix()
+#     main_rotate_matrix()
+    main_clear_mat()
     
 
     

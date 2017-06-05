@@ -2,6 +2,38 @@
 ex1: recursive fibonacci w/ dynamic programming
 ex2: iteration fibonacci
 """
+def fibo(n):
+    if n == 0 or n == 1:
+        return 1
+    
+    if n in fibo.cache:
+        return fibo.cache[n]
+    
+    if (n-1) in fibo.cache:
+        fn_1 = fibo.cache[n-1]
+    else:
+        fn_1 = fibo(n-1)
+        fibo.cache[n-1] = fn_1
+    
+    if (n-2) in fibo.cache:
+        fn_2 = fibo.cache[n-2]
+    else:
+        fn_2 = fibo(n-2)
+        fibo.cache[n-2] = fn_2
+        
+    num = fn_1 + fn_2
+    fibo.cache[n] = num
+    return num
+    
+fibo.cache = {}
+
+
+
+def main_list_fibo():
+    for i in range(1000):
+        print fibo(i)
+        
+
 
 
 """
@@ -90,3 +122,9 @@ Expression:1^0|0|1
 Desired result: false (0)
 Output: 2ways. 1^((0|0)|1) and 1^(0|1(0|1)).
 """
+
+
+if __name__ == "__main__":
+    main_list_fibo()
+    
+    print "\nDone"
