@@ -74,26 +74,57 @@ def main_check_balance():
 	print "\n",check_tree_balance(root)
 		
 	
-	
-	
-	
-	
-			
-		
-			
-		
-		
-		
-				 	
-		
-		
-
 
 
 """
 4.2 Given a directed graph, design an algorithm to find out whether there is a route
 between two nodes.
 """
+def check_route(graph_in, pA, pB):
+	import collections 
+	node_queue = collections.deque()
+	
+	avail_paths = []
+	
+	node_queue.append((pA,[pA]))
+	
+	while node_queue:
+		node, path = node_queue.popleft()
+		
+		print node
+		
+		if pB == node:
+			avail_paths.append(path)
+		
+		for sibling in graph_in[node]:
+			if sibling not in path:
+				new_path = list(path)
+				new_path.append(sibling)
+				node_queue.append((sibling,new_path) )
+				
+	
+	return avail_paths
+
+
+def main_check_route():
+	graph = {
+		1:[2,6,3],
+		2:[4,5],
+		3:[1],
+		4:[7],
+		5:[8],
+		6:[7],
+		7:[3],
+		8:[7]
+		}
+	
+	print check_route(graph, 1,3)
+	
+	
+			
+		
+	
+
 
 
 """
@@ -165,6 +196,7 @@ Output : Root of below tree
 """
 
 if __name__ == "__main__":
-	main_check_balance()
+# 	main_check_balance()
+	main_check_route()
 	
 	print "Done\n"
