@@ -1,0 +1,35 @@
+digraph demo1{
+	//[CLS]:Add this line to use Chinese character
+	graph [fontname = "arialbd.ttf"];
+	node[fontname = "consolab.ttf"];
+	edge [fontname = "PMingLiu"];
+	
+	
+	"a" [shape = circle, color = blueviolet, fontcolor = blueviolet, fontsize = 20];
+	
+	{a,b,c,d}->{e,f,g,h};
+	
+	//[CLS] subgraph cluster_XXXX
+	subgraph cluster_Foo{
+		label = "cluster_Foo 中文";
+		a->{e,f};
+	}
+	
+	
+	subgraph cluster_Bar{
+		label = "cluster_Bar";
+		fontsize = 24;
+		fillcolor = darkslategray;
+		style = filled;
+		fontcolor = white;
+		node [fontcolor = white, color = white];
+		
+		b->{g,h}; 	//[CLS]:b,g,h have been drew  before this line,so they are not affected the color setting in this CLUSTER
+		1->2;		//[CLS]:1,2  have not been drew yet, use the new setting of this CLUSTER
+	}
+	
+	
+	"中文"->"英文" [label = "路徑說明"]; //[CLS]:edge can have a name
+	"形狀測試" [shape = Mcircle, style = filled, color = grey, fillcolor = aquamarine, fontsize = 20];
+}
+

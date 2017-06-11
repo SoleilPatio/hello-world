@@ -1,0 +1,19 @@
+//[CLS]:encode the document as UTF-8
+//[CLS]:Windows->Show View->Others->EclipseGraphviz->Image Viewer
+//[CLS]:command line: dot chinese.dot -Tpng -o out.png
+
+digraph chinese_demo{
+	//[CLS]:use chinese character
+	graph [fontname = "arialbd.ttf"];
+	node[fontname = "consolab.ttf"];
+	edge [fontname = "PMingLiu"];
+	
+	
+	label = "中文標題";
+	
+	"台北"->"新竹"->"台中"->"高雄";
+	
+	"台北"->"高雄" [label="捷徑"];
+	"台北"->"台中";
+	a->b->c->a;
+}
