@@ -80,10 +80,9 @@ def RE_Sample():
         print "No match"
     
     
-        
-        
+def RE_Replace():
     """
-     [CLS]:Part 4:
+    [CLS]:Part 4:
     [CLS]:replace() will return a new string
     """
     print "[re.sub()]:"
@@ -102,6 +101,26 @@ def RE_Sample():
     """
     num = re.sub(r'\D', "", phone)    
     print "Phone Num : ", num
+    
+    
+    
+def RE_KeyValuePairToDictionary():
+    in_string = "key1='this is key1', key2='ThisIsKey2', key3='key3 has no comma'"
+    
+    """
+    [CLS]:(?= )   ==> means "matched but not be included"
+    """
+    patternObj = re.compile(r"\s*([^=,]+)\s*=\s*([^=]+)(?=,|$)", re.M)
+    
+    print patternObj.findall(in_string)
+    new_dict = dict( patternObj.findall(in_string) )
+    print new_dict
+    
+    
+    
+    
+    
+    
     
     
 def RE_PatternTest():
@@ -126,6 +145,8 @@ def RE_PatternTest():
     
 
 if __name__ == '__main__':
-#     RE_Sample()
-    RE_PatternTest()
+    RE_Sample()
+    RE_Replace()
+    RE_KeyValuePairToDictionary()
+#     RE_PatternTest()
     

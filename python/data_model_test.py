@@ -18,6 +18,10 @@ class FooObj(object):
         print "[destructor]"
         pass
     
+    #call by str()
+    def __str__(self):
+        return "__str__"
+    
     """
     Emulating container types
     """
@@ -25,6 +29,12 @@ class FooObj(object):
     def __getitem__(self,key):
         print "[__getitem__]"
         return self.test_dict[key]
+    
+    def __setitem__(self, key, value):
+        print "[__setitem__]"
+        self.test_dict[key] = value
+        return self.test_dict[key]
+        
     
     def __missing__(self, key):
         print "[__missing__]"
@@ -68,5 +78,9 @@ if __name__ == '__main__':
     
     print foo["A"]
     print foo["Z"] if "Z" in foo else "not in"
+    
+    foo["A"] = 999
+    print foo["A"]
+    
     
     pass
