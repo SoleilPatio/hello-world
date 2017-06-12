@@ -29,7 +29,9 @@ class tree41(object):
 					self.right.add(data)
 	
 	def show(self):
+		from graphviz import Digraph
 		import collections
+		dot = Digraph(comment='Tree')
 		QQ = collections.deque()
 		
 		level = 0
@@ -45,8 +47,32 @@ class tree41(object):
 			print node.data if node else "X",
 			
 			if node:
+				dot.node(str(node.data)+"_"+str(level))
+				if node.left:
+					dot.node(str(node.left.data)+"_"+str(level+1))
+					dot.edge(str(node.data)+"_"+str(level), str(node.left.data)+"_"+str(level+1) )
+				else:
+					dot.node("NIL"+"_"+str(level+1))
+					dot.edge(str(node.data)+"_"+str(level),"NIL"+"_"+str(level+1))
+					
+				if node.right:
+					dot.node(str(node.right.data)+"_"+str(level+1))
+					dot.edge(str(node.data)+"_"+str(level), str(node.right.data)+"_"+str(level+1) )
+				else:
+					dot.node("NIL"+"_"+str(level+1))
+					dot.edge(str(node.data)+"_"+str(level),"NIL"+"_"+str(level+1))
+					
 				QQ.append((level+1,node.left))
 				QQ.append((level+1,node.right))
+		
+		print dot.source
+		dot.render('output_tree.dot', view=True)  
+				
+				
+				
+
+
+
 
 			
 def check_tree_balance(root):
@@ -196,7 +222,7 @@ Output : Root of below tree
 """
 
 if __name__ == "__main__":
-# 	main_check_balance()
-	main_check_route()
+	main_check_balance()
+# 	main_check_route()
 	
 	print "Done\n"
