@@ -1,4 +1,5 @@
 
+import sys
 
 class FooObj(object):
     
@@ -6,6 +7,14 @@ class FooObj(object):
     Basic
     """
     def __init__(self):
+        if sys.version_info[0] == 3:
+            #Python 3
+            super().__init__()
+        else:
+            #Python 2 : super return super class of FooObj
+            super(FooObj, self).__init__()
+        
+        
         print "[constructor]"
         self.test_dict = {
                       "A":111,
