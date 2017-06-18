@@ -158,6 +158,106 @@ def main_check_route():
 4.3 Given a sorted (increasing order) array with unique integer elements, write an
 algorithm to create a binary search tree with minimal height.
 """
+class node43(object):
+	def __init__(self, data = None):
+		self.data = data
+		self.left = None
+		self.right = None
+		
+	def add(self, data):
+		
+		if self.data == None:
+			self.data = data
+			return
+		
+		if data <= self.data:
+			if self.left == None:
+				self.left = node43(data)
+			else:
+				self.left.add(data)
+		else:
+			if self.right == None:
+				self.right = node43(data)
+			else:
+				self.right.add(data)
+				
+		return
+	
+	def show(self):
+		import collections
+		
+		QQ = collections.deque()
+		
+		level = 0
+		last_level = level
+		QQ.append((self, level))
+		
+		while QQ:
+			node, level = QQ.popleft()
+			
+			if last_level != level:
+				print ""
+				
+			if node != None:
+				print node.data,
+			else:
+				print "x",
+
+			last_level = level
+
+			if node:
+				QQ.append((node.left, level+1))
+				QQ.append((node.right, level+1))
+		print ""
+
+def create_min_tree(dataset):
+	
+	count = len(dataset)
+	mid = count/2
+	
+	if count == 0:
+		return None
+	elif count == 1:
+		return node43(dataset[0])
+
+	ret_node = node43(dataset[mid])
+	
+	left_tree = create_min_tree(dataset[0:mid])
+	right_tree = create_min_tree(dataset[mid+1:])
+	
+	ret_node.left = left_tree
+	ret_node.right = right_tree
+	
+	return ret_node
+	
+	
+	
+	
+	
+	
+	
+			
+			
+def main_min_tree():
+	import numpy as np
+	
+	
+	
+	data_set_2 =  np.random.randint(10,size=10)
+	
+	tree = node43()
+	for d in data_set_2:
+		tree.add(d)
+		
+	tree.show()
+	
+	data_set = [1,2,3,4,5,6,7,8]
+	
+	new_tree= create_min_tree(data_set)
+	new_tree.show()
+		
+		
+		
 
 
 """
@@ -222,7 +322,8 @@ Output : Root of below tree
 """
 
 if __name__ == "__main__":
-	main_check_balance()
+# 	main_check_balance()
 # 	main_check_route()
+	main_min_tree()
 	
 	print "Done\n"
