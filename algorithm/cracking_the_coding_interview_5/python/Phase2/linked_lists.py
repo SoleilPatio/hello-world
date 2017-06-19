@@ -280,7 +280,84 @@ x come before all nodes greater than or equal to x.
 
 [CLS][NOTE]:IT'S VERY HARD TO MOVE LINK OF SINGLE LINKED LIST!!!!!!!USE DATA SWAP!!
 """
-
+class list24(object):
+    def __init__(self, data=None):
+        self.data = data
+        self.link = None
+        
+    def append_data(self, data):
+        
+        node = self
+        while node.link != None:
+            node = node.link
+            
+        node.link = list24(data)
+    
+    def append_node(self, a_node):
+        
+        node = self
+        while node.link != None:
+            node = node.link
+            
+        node.link = a_node
+        
+    def extend(self, otherlist):
+        node = self
+        while node.link != None:
+            node = node.link
+            
+        node.link = otherlist.link
+        
+    def show(self):
+        node = self.link
+        
+        while node != None:
+            print node.data,"->",
+            node = node.link
+            
+        print "nil"
+        
+        
+def partition_list(a_list, x):
+    greater_list = list24()
+    
+    prev_node = a_list
+    node = a_list.link
+    while node != None:
+        if node.data >= x:
+            prev_node.link = node.link
+            greater_list.append_node(node)
+            node.link = None
+            node = prev_node.link
+        else:
+            prev_node = node
+            node = node.link
+            
+            
+    a_list.show()
+    greater_list.show()
+    
+    a_list.extend(greater_list)
+    
+    
+def main_partition():
+    
+    a_list = list24()
+    a_list.append_data(9)
+    a_list.append_data(3)
+    a_list.append_data(5)
+    a_list.append_data(7)
+    a_list.append_data(1)
+    a_list.append_data(8)
+    
+    a_list.show()
+    partition_list(a_list, 5)
+    a_list.show()
+            
+            
+        
+        
+    
 
 
 """
@@ -321,4 +398,5 @@ Output: C
 
 if __name__ == "__main__":
 #     main_remove_duplicate()
-    main_find_last_k()
+#     main_find_last_k()
+    main_partition()

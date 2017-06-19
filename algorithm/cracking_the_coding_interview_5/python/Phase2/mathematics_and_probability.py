@@ -70,6 +70,7 @@ triangle? Assume that each ant randomly picks a direction, with either direction
 being equally likely to be chosen, and that they walk at the same speed.
 Similarly, find the probability of collision with n ants on an n-vertex polygon
 """
+"""math calculation"""
 
 """
 7.3 Given two lines on a Cartesian plane, determine whether the two lines would

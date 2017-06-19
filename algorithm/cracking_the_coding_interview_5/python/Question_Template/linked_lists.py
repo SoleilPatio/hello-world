@@ -25,7 +25,7 @@ Result: nothing is returned, but the new linked list looks like a- >b- >d->e
 2.4 Write code to partition a linked list around a value x, such that all nodes less than
 x come before all nodes greater than or equal to x. 
 
-[CLS][NOTE]:IT'S VERY HARD TO MOVE LINK OF SINGLE LINKED LIST!!!!!!!USE DATA SWAP!!
+[CLS][NOTE]:IT'S VERY HARD TO MOVE LINK OF SINGLE LINKED LIST!!!!!!!USE DATA SWAP!! ==> idiot solution
 """
 
 

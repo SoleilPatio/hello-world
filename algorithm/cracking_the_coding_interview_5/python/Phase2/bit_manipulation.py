@@ -65,6 +65,66 @@ def main_show_binary():
 5.3 Given a positive integer, print the next smallest and the next largest number
 that have the same number of 1 bits in their binary representation
 """
+def find_next_smallest(n):
+    bin_n_str = bin(n)
+    print bin_n_str
+    
+    first_1_0_index = -1
+    trailing_0_count = 0
+    
+    temp = n
+    
+    b_found_1 = False
+    
+    for i in range(64):
+        if temp & (1<<i) != 0:
+            b_found_1 = True
+        else:
+            if b_found_1 == False:
+                trailing_0_count += 1
+            else:
+                first_1_0_index = i
+                break
+            
+    if first_1_0_index == -1:
+        print "Error"
+        return None
+    
+    print first_1_0_index
+    print trailing_0_count
+    
+    ret = n
+    
+    first_part = n >> (first_1_0_index)
+    second_part = n & (1<<first_1_0_index-1)-1
+    
+    print bin(first_part)
+    print bin(second_part)
+    
+    f_part = ( (first_part|1) <<  (first_1_0_index) )
+    s_part = second_part >> trailing_0_count
+    
+    print bin(f_part)
+    print bin(s_part)
+    
+    ret = f_part | s_part
+    
+    print ret
+    print bin(ret)
+    
+    
+                
+            
+        
+    
+    
+    
+    
+    
+    
+def main_find_next():
+    n = 13948
+    find_next_smallest(n)
 
 
 """
@@ -107,6 +167,7 @@ int y) which draws a horizontal line from (x1, y)to(x2, y).
 
 if __name__ == "__main__":
 #     main_insert()
-    main_show_binary()
+#     main_show_binary()
+    main_find_next()
     
     print "\nDone"

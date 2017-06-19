@@ -88,6 +88,31 @@ Imagine certain spots are "off limits," such that the robot cannot step on them.
 Design an algorithm to find a path for the robot from the top left to the bottom
 right.
 """
+import numpy
+def path_count(x,y):
+    if x < 0 or y < 0:
+        return 0
+    if x == 0 and y == 0:
+        return 1
+    
+    ret = path_count(x-1,y) + path_count(x,y-1)
+    
+    path_count.map[x][y] = ret
+    
+    return ret
+
+X = 1
+Y = 1
+path_count.map = [[0 for _ in range(X+1)] for _ in range(X+1)]
+
+
+
+def main_path_count():
+    print path_count.map
+    print path_count(X,X)
+    print path_count.map
+    
+    
 
 
 """
@@ -162,6 +187,7 @@ Output: 2ways. 1^((0|0)|1) and 1^(0|1(0|1)).
 
 if __name__ == "__main__":
 #     main_list_fibo()
-    main_count_step()
+#     main_count_step()
+    main_path_count()
     
     print "\nDone"
