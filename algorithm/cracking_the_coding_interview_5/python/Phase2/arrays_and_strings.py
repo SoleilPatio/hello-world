@@ -351,6 +351,16 @@ def main_clear_mat():
 of another. Given two strings, s1 and s2, write code to check If s2 is a rotation of s1
 using only one call to isSubstring (e.g., "waterbottLe" is a rotation of "erbottLewat").
 """
+def isSubstring(s1,s2):
+    return s2 in s1
+    
+    
+def check_if_rotation(s1, s2):
+    s = s1+s1
+    return isSubstring(s,s2)
+    
+def main_check_if_substring():
+    print check_if_rotation("waterbottLe", "erbottLewat")
 
 
 if __name__ == "__main__":
@@ -360,7 +370,8 @@ if __name__ == "__main__":
 #     main_encode_string()
 #     main_compress_str()
 #     main_rotate_matrix()
-    main_clear_mat()
+#     main_clear_mat()
+    main_check_if_substring()
     
 
     
