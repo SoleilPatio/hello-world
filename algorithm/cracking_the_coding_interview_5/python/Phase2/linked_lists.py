@@ -272,6 +272,57 @@ EXAMPLE
 Input: the node c from the linked list a->b->c->d->e
 Result: nothing is returned, but the new linked list looks like a- >b- >d->e
 """
+class list23(object):
+    def __init__(self, data=None):
+        self.data=data
+        self.next=None
+        
+    def append(self, data):
+        
+        node = self
+        
+        while node.next != None:
+            node = node.next
+            
+        node.next = list23(data)
+        return node.next
+    
+    def show(self):
+        node = self
+        
+        while node != None:
+            print node.data, "->",
+            node = node.next
+            
+        
+        
+    
+def del_list_node( node ):
+    if node.next == None:
+        return
+    
+    
+    node.data = node.next.data
+    node.next = node.next.next
+    
+    
+        
+def main_del_node():
+    listhead = list23('a')
+    listhead.append('b')
+    nodec = listhead.append('c')
+    listhead.append('d')
+    listhead.append('e')
+    
+    listhead.show()
+    del_list_node(nodec)
+    listhead.show()
+    
+    
+    
+    
+    
+        
 
 
 """
@@ -399,4 +450,5 @@ Output: C
 if __name__ == "__main__":
 #     main_remove_duplicate()
 #     main_find_last_k()
-    main_partition()
+#     main_partition()
+    main_del_node()

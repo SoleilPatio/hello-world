@@ -138,6 +138,30 @@ EXAMPLE
 Input: 31,14
 Output: 2
 """
+def count_diff_bit(a,b):
+    c=a^b
+    
+    print bin(a)
+    print bin(b)
+    print bin(c)
+    
+    
+    count = 0
+    while c:
+        
+        print bin(c)
+        if (c & 1) == 1:
+            count += 1
+            print "count", count
+        c = (c >> 1)
+    
+    return count
+
+def main_count_diff_bit():
+    print count_diff_bit(31,14)
+    
+            
+        
    
         
 
@@ -168,6 +192,7 @@ int y) which draws a horizontal line from (x1, y)to(x2, y).
 if __name__ == "__main__":
 #     main_insert()
 #     main_show_binary()
-    main_find_next()
+#     main_find_next()
+    main_count_diff_bit()
     
     print "\nDone"
