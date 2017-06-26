@@ -26,6 +26,25 @@ if __name__ == "__main__":
     """
     A*x = b Form
     """
+    """
+    [CLS]: the last column is equation constant 
+            x + y +   z  = 1
+            x + y + 2*z  = 3
+    M = Matrix([
+                [1, 1, 1, 1],
+                [1, 1, 2, 3]])
+                
+    M[:,:-1] = 
+        Matrix([
+                [1, 1, 1],
+                [1, 1, 2]])
+    
+    M[:,-1]
+        Matrix([
+                [1],
+                [3]])
+    
+    """
     M = sp.Matrix(((1, 1, 1, 1), (1, 1, 2, 3)))
     system = A, b = M[:, :-1], M[:, -1]
     roots = sp.linsolve(system, x, y, z)

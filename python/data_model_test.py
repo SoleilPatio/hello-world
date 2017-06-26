@@ -31,6 +31,10 @@ class FooObj(object):
     def __str__(self):
         return "__str__"
     
+    #call when print in list of object,instead of __main__.Test instance at 0x00CBC1E8 ...etc..
+    def __repr__(self):
+        return "data structure"
+    
     """
     Emulating container types
     """
