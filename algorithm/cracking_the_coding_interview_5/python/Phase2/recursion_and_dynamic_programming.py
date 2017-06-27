@@ -122,7 +122,33 @@ index, if one exists, in array A.
 FOLLOW UP
 What if the values are not distinct?
 """
-
+def find_magic(a_list, start, end):
+    if start > end:
+        return None
+    
+    mid = (start+end) /2
+    
+    if mid == a_list[mid]:
+        return mid
+    elif mid > a_list[mid]:
+        return find_magic(a_list, mid+1, end)
+    else:
+        return find_magic(a_list, start, mid-1)
+    
+    
+def main_find_magic():
+    a = [-1,-1,1,2,4,8,9,10,11,11,11,11]
+    
+    print find_magic(a, 0, len(a)-1)
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 """
 9.4 Write a method to return all subsets of a set.
@@ -188,6 +214,7 @@ Output: 2ways. 1^((0|0)|1) and 1^(0|1(0|1)).
 if __name__ == "__main__":
 #     main_list_fibo()
 #     main_count_step()
-    main_path_count()
+#     main_path_count()
+    main_find_magic()
     
     print "\nDone"
