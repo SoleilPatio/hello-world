@@ -33,7 +33,7 @@ class FooObj(object):
     
     #call when print in list of object,instead of __main__.Test instance at 0x00CBC1E8 ...etc..
     def __repr__(self):
-        return "data structure"
+        return "%s"%self.__dict__
     
     """
     Emulating container types
