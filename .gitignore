@@ -3,6 +3,8 @@
 *.class
 .pydevproject
 .project
+.ipynb_checkpoints
+.settings
 output_*
 
 #[cscope symbol]

@@ -153,12 +153,12 @@ def main_find_magic():
 """
 9.4 Write a method to return all subsets of a set.
 """
-
+"DONE"
 
 """
 9.5 Write a method to compute all permutations of a string.
 """
-
+"DONE"
 
 """
 9.6 Implement an algorithm to print all valid (e.g., properly opened and closed)
