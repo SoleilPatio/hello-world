@@ -26,6 +26,7 @@ if __name__ == "__main__":
         
     """
     [CLS]: Priority Queue/MinHeap
+    [Note]: No MaxHeap, if you want max heap, negative the key i.e 3->-3, 2->-2,...
     """
     pq = Q.PriorityQueue()
     
