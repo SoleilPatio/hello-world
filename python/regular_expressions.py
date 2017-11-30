@@ -118,9 +118,15 @@ def RE_KeyValuePairToDictionary():
     
     
     
+"""
+Repeat Pattern
+"""    
+def RE_FindAll():
+    s1 = "irq=2 name=arch_timer"
+    s2 = "hw_module=4, imgo_en=1, rrzo_en=4, imgo_bpp=0, rrzo_bpp=0, imgo_xsize=3339, imgo_ysize=0, rrzo_xsize=3599, rrzo_ysize=1079, rrz_src_w=2672, rrz_src_h=2008, rrz_dst_w=1920, rrz_dst_h=1080, rrz_hori_step=45608, rrz_vert_step=45614, DISP_OVL0_2L__OVL_L1_CON=12544"
     
-    
-    
+    re.findall(r"\w+=\w+", s2)     
+
     
     
 def RE_PatternTest():

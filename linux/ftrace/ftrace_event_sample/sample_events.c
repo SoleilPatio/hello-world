@@ -9,6 +9,10 @@
 
    if you use DEFINE_TRACE() macro, then no node in sys/kernel/debug/tracing/events/ been found
 */
+/*If miss CREATE_TRACE_POINTS:
+ * error message:
+ * relocation R_AARCH64_ADR_PREL_PG_HI21 against external symbol `__tracepoint_sample_tracing' can not be used when making a shared object; recompile with -fPIC
+ */
 
 #define CREATE_TRACE_POINTS
 #include "sample_events.h"
