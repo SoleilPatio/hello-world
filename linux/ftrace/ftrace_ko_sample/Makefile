@@ -1,7 +1,8 @@
 obj-m += ftrace_test.o
 
 #LFK specific
-TARGET_PRODUCT=full_k35mv1_64-userdebug
+#TARGET_PRODUCT=full_k35mv1_64-userdebug
+TARGET_PRODUCT=full_k99v2_64_baymo-userdebug
 export TARGET_PRODUCT
 
 #Cannot assign tool chain path here for latter make file use,dont know why
@@ -12,8 +13,8 @@ export TARGET_PRODUCT
 
 
 #LFK use out directory as kernel buil directory
-KERNEL_PATH=/proj/mtk02679/alps.l1.mp3.ppb/out/target/product/evb6735_64/obj/KERNEL_OBJ
-
+#KERNEL_PATH=/proj/mtk02679/alps.l1.mp3.ppb/out/target/product/evb6735_64/obj/KERNEL_OBJ
+KERNEL_PATH=/proj/mtk02679/gitmtk/main-branch/out/target/product/k99v2_64_baymo/obj/KERNEL_OBJ
 
 alps:
 	make ARCH=arm64 -C $(KERNEL_PATH)  M=$(PWD) modules
