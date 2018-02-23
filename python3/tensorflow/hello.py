@@ -158,7 +158,7 @@ def linear_regression():
     
 def linear_regression_tf_estimator():
     """
-    Step1: Prepare model & data
+    Step0: Prepare  data
     """
     """
     Clouds: 1-D feature, named "x"
@@ -167,14 +167,8 @@ def linear_regression_tf_estimator():
     
     print("feature_column =", feature_columns)
     
-    """
-    a linear regression 
-    Clouds: feed estimator "only the features" , it will automatically decide the dimention of W and b, this is reasonable
-    """
-    """
-    create a estimator with 1-d feature named "x"
-    """
-    estimator = tf.estimator.LinearRegressor(feature_columns = feature_columns)
+   
+    
     
     """
     prepare tensorflow data from numpy
@@ -199,16 +193,47 @@ def linear_regression_tf_estimator():
     
     
     """
-    Step2: Training with input_fn
-    Clouds: input_fn has 1. sample features (x) 2. result (y)
+    Step 1: create a estimator with 1-d feature named "x"
+        Clouds:
+            decide your training model (linear regression)
+            feed estimator "only the features" , it will automatically decide the dimention of W and b, this is reasonable
+    """
+    """
+    Clouds: Use default "LinearRegression" estimator
+    """
+    estimator = tf.estimator.LinearRegressor(feature_columns = feature_columns)
+    """
+    Clouds: Use customize model
+    """
+    estimator = tf.estimator.Estimator(model_fn=_model_fn)
+    
+    
+    
+    """
+    Step2: "Training" with input_fn
+        Clouds: 
+            input_fn has 
+                1. sample features (named x) 
+                2. result (y)
+            this step really do 1000 times fitting!!
     """
     # We can invoke 1000 training steps by invoking the  method and passing the
     # training data set.
     result = estimator.train(input_fn=input_fn, steps=1000)
     print("estimator.train result=", result)
+    """
+    Clouds: how to get the weighting value???
+    """
     
     """
-    Step3: Evaluate
+    Step3: "Evaluate"
+        Clouds:
+            Just appy the result of fitting
+            evalute return:
+                train metrics: {'loss': 3.5809224e-09, 'average_loss': 8.9523061e-10, 'global_step': 1000}
+                it has default loss function, but what is average_loss?
+                where is the weighting value?
+                
     """
     # Here we evaluate how well our model did.
     train_metrics = estimator.evaluate(input_fn=train_input_fn)
@@ -217,7 +242,34 @@ def linear_regression_tf_estimator():
     print("eval metrics: %r"% eval_metrics)
      
     
+def _model_fn(features, labels, mode):
+    print("\t_model_fn:features=", features)
+    print("\t_model_fn:labels=", labels)
+    print("\t_model_fn:mode=", mode)
     
+    # Build a linear model and predict values
+    W = tf.get_variable("W", [1], dtype=tf.float64)
+    b = tf.get_variable("b", [1], dtype=tf.float64)
+    y = W*features['x'] + b
+    # Loss sub-graph
+    """Clouds: what is "labels"? "labels" is the standard answer? where "y" is the predict answer?""" 
+    loss = tf.reduce_sum(tf.square(y - labels))
+    # Training sub-graph
+    global_step = tf.train.get_global_step()
+    optimizer = tf.train.GradientDescentOptimizer(0.01)
+    """Clouds: what is tf.group???"""
+    train = tf.group(optimizer.minimize(loss),
+                   tf.assign_add(global_step, 1))
+    print("--------\n\t_model_fn:train group=", train )
+    print("--------\n\n")
+    
+    # EstimatorSpec connects subgraphs we built to the
+    # appropriate functionality.
+    return tf.estimator.EstimatorSpec(
+          mode=mode,
+          predictions=y,
+          loss=loss,
+          train_op=train)
     
     
     
