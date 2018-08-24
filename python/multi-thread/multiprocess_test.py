@@ -2,8 +2,8 @@
 document: https://docs.python.org/2/library/multiprocessing.html
 
 [Exchange Object between Process]:
-    1.multiprocessing.Queue (simplex)
-    2.multiprocessing.Pipe (duplex)
+    1.multiprocessing.Queue (simplex) : built on top of pipe
+    2.multiprocessing.Pipe (duplex)  : faster than Queue
     
 [Synchronization Object]:
     1.Lock() : l.acquire() l.release()
@@ -12,7 +12,7 @@ document: https://docs.python.org/2/library/multiprocessing.html
     1. Shared Memory: Fast,but inflexiable
         a.multiprocessing.Value
         b.multiprocessing.Array
-    2. Server Process: Slow, flexiable, cross-over network
+    2. Server Process: Slow, flexiable, cross-over network. Slower than shared memory because object serialize & de-serialize
         a.multiprocessing.Manager
             i. multiprocessing.Manager.dict()
             ii.multiprocessing.Manager.list()
