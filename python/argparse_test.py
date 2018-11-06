@@ -17,6 +17,32 @@ if __name__ == "__main__":
     """
     parser.add_argument("square", type=int, help="display a square of a given number")
     #"--verbose",
+    
+    
+    # This is the correct way to handle accepting multiple arguments.
+    # '+' == 1 or more.
+    # '*' == 0 or more.
+    # '?' == 0 or 1.
+    # An int is an explicit number of arguments to accept.
+    """
+    drawback: eating position arguments. ex. foo.py --nargs 111 222 333 position_args_not work
+    """
+    parser.add_argument('--nargs', nargs='+')
+    
+    """
+    use append
+    mycommand --carpark 17 --carpark 18
+    """
+    parser.add_argument('--carpark',
+                    dest='carpark_ids',
+                    type=int,
+                    action='append',
+                    default=[],
+                    help="One carpark ID (can be used multiple times)"
+                    )
+    
+    
+    
     """
     [CLS]: if argements are illegal, this "parse_args" will show help and exit program
     """
