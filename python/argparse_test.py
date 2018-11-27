@@ -4,7 +4,39 @@ __version_info__ = ('2013','03','14')
 __version__ = '-'.join(__version_info__)
 
 
+def ParseCustomeCLI(cli_buffer):
+    my_args = cli_buffer.split()
+    print "\tmy_args = ", my_args
+    
+    parser = argparse.ArgumentParser()
+    
+    parser.add_argument("-foo", help="info for foo", default="default value")
+    parser.add_argument("-bar", help="info for bar", default="default value", required=True)
+    parser.add_argument("-boolean",  action="store_true", help="increase output verbosity")
+    
+    args = parser.parse_args(my_args)
+
+    print "\targs = ", args
+    
+    print "\tDone"
+    
+    
+    
+
+
 if __name__ == "__main__":
+    
+    """
+    [CLS]: use know CLI string to parse
+    """
+    cli_buffer = "-foo FOO -bar BAR -boolean"
+    ParseCustomeCLI(cli_buffer)
+    
+    
+    
+    """
+    [CLS]: Normal Usage
+    """
     parser = argparse.ArgumentParser()
     
     parser.add_argument("-foo", help="info for foo", default="default value")
