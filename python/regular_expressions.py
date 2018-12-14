@@ -10,6 +10,17 @@ def RE_Sample():
     re.S    Makes a period (dot) match any character, including a newline.
     re.U    Interprets letters according to the Unicode character set. This flag affects the behavior of \w, \W, \b, \B.
     re.X    Permits "cuter" regular expression syntax. It ignores whitespace (except inside a set [] or when escaped by a backslash) and treats unescaped # as a comment marker.
+    
++-----------+----------------------------------------+-----------------+-------------------+
+| function  |                  Note                  |       ^$        | re.MULTILINE/re.M |
++-----------+----------------------------------------+-----------------+-------------------+
+| match()   | search from begin of str               |                 |                   |
+| search()  | search from anywhere in str            | ^:begin of str  | ^:begin of line   |
+| findall() | search many times from anywhere in str | same as search? | same as search?   |
+| sub()     | same as find all and replace           | same as search? | flags=re.M        |
++-----------+----------------------------------------+-----------------+-------------------+
+
+
     """
     
     line = "Cats are smarter than dogs"
