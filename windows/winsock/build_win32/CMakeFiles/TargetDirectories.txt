@@ -1,0 +1,4 @@
+C:/APN/PROJECT/hello-world/windows/winsock/build_win32/CMakeFiles/server.dir
+C:/APN/PROJECT/hello-world/windows/winsock/build_win32/CMakeFiles/client.dir
+C:/APN/PROJECT/hello-world/windows/winsock/build_win32/CMakeFiles/edit_cache.dir
+C:/APN/PROJECT/hello-world/windows/winsock/build_win32/CMakeFiles/rebuild_cache.dir
