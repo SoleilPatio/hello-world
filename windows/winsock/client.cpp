@@ -4,6 +4,7 @@
  *  Created on: 2019¦~7¤ë1¤é
  *      Author: cloud
  */
+#define _WIN32_WINNT 0x501 /*[CLS]: for getaddrinfo() declaration*/
 
 #define WIN32_LEAN_AND_MEAN
 
