@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include "rtos_lib.h"
 
-extern int rtos_func(int argc);
 
 int main(int argc, char **argv) {
 
