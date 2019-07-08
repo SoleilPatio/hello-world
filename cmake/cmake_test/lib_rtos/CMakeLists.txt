@@ -17,6 +17,7 @@ add_library(rtos rtos_lib.c)
 #		2. ONLY target_*** version of include command can set PUBLIC
 #			2-1. BUILD_INTERFACE :   will add to include path who add_subdirectory it
 #			2-2. INSTALL_INTERFACE : will add to include path who import this
+#			2-3. no space after ":" in generator $<>
 #			
 #######################################################################
 #1.
@@ -37,12 +38,12 @@ target_include_directories(rtos PUBLIC
 							$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/public_include>
 							$<INSTALL_INTERFACE:include> #add path to who import this = prefix+include
 							)
-
-
+							
 
 #######################################################################
 #Use CMAKE_INSTALL_PREFIX to assign install path,
-# (instead of DESTINATION variable)
+#	1.instead of DESTINATION variable
+#	2.this CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT must place after project()
 #######################################################################
 set(SDK_HOME ${CMAKE_CURRENT_SOURCE_DIR}/../SDK_HOME)
 #set (CMAKE_INSTALL_PREFIX "${SDK_HOME})

@@ -52,7 +52,7 @@ endif()
 add_library(rtos STATIC IMPORTED)
 
 set_target_properties(rtos PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include;C:/APN/PROJECT/hello-world/cmake/cmake_test/lib_rtos/;C:/APN/PROJECT/hello-world/cmake/cmake_test/lib_rtos/C:/APN/PROJECT/hello-world/cmake/cmake_test/lib_rtos/include;${_IMPORT_PREFIX}/include"
 )
 
 # Load information for each installed configuration.
