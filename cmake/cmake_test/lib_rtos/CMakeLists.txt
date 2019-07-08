@@ -6,31 +6,38 @@ project (sdk_rtos)
 #######################################################################
 #Define target:
 #		1. library
-#		2. public header files
-#		3. use ";" to add multiple files
 #######################################################################
 add_library(rtos rtos_lib.c)
+
+#######################################################################
+#[includes handling]:
+#		1. public header files
+#			1-1. use ";" to add multiple files
+#			1-2. PUBLIC_HEADER property can be used in install copy phase 
+#		2. ONLY target_*** version of include command can set PUBLIC
+#			2-1. BUILD_INTERFACE :   will add to include path who add_subdirectory it
+#			2-2. INSTALL_INTERFACE : will add to include path who import this
+#			
+#######################################################################
+#1.
 set_target_properties(rtos PROPERTIES PUBLIC_HEADER 
 							"./include/rtos_lib.h;./public_include/rtos_lib_public.h"
 							)
 
-include_directories(./include)
-include_directories(./public_include)
 
+#2.
+#use target_include_directories(), for target_version has PUBLIC to propagate
+#include_directories(./include)
+target_include_directories(rtos PUBLIC 
+							$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+							$<INSTALL_INTERFACE:include>
+							)
+							
+target_include_directories(rtos PUBLIC 
+							$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/public_include>
+							$<INSTALL_INTERFACE:include> #add path to who import this = prefix+include
+							)
 
-#######################################################################
-#[CLS]: seems the below do not have any benefits
-#INSTALL_INTERFACE : seems has no effect at any aspects
-#BUILD_INTERFACE : will add to -Ixxxx in this build, but no effect to export
-#######################################################################
-#include_directories($<INSTALL_INTERFACE:public_include_install_1> 
-#					$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/public_include>)
-
-
-#target_include_directories(rtos PUBLIC 
-#							$<INSTALL_INTERFACE:public_include> 
-#							$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/public_include>
-#							)
 
 
 #######################################################################
