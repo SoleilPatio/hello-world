@@ -15,3 +15,26 @@ D.S SD:0x0c560000 %LE %LONG &regval;
 ; read CPU register
 ;======================================================
 &regval=Register(R0)
+
+
+;======================================================
+;function call 版本
+;======================================================
+;R.S R0 0x10
+;R.S R1 0x20
+;R.S R2 0x30
+
+GoSub UpdateReg R0
+GoSub UpdateReg R1
+GoSub UpdateReg R2
+
+Stop
+
+UpdateReg:
+Entry &reg
+Local &Temp
+&Temp=Register(&reg)
+&Temp=&Temp|0x1
+Register.Set &reg &Temp
+Return
+
