@@ -1,3 +1,10 @@
+;======================================================
+; useful document
+;======================================================
+;reference card:				https://www.lauterbach.com/reference_card_web.pdf
+;general function reference:	http://www2.lauterbach.com/pdf/general_func.pdf
+;general command reference:		http://www2.lauterbach.com/pdf/general_ref_v.pdf
+
 
 ;======================================================
 ; read register, binary operation , write back
