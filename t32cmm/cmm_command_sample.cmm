@@ -1,0 +1,17 @@
+
+;======================================================
+; read register, binary operation , write back
+;======================================================
+;unlock TCM & reset EB
+;D.S SD:0x0c560000 %LE %LONG 0x1F000001;
+
+&regval=Data.Long(SD:0x0c560000)
+print "&regval"
+&regval=&regval&~(0x1<<3)|(0x1)
+print "&regval"
+D.S SD:0x0c560000 %LE %LONG &regval;
+
+;======================================================
+; read CPU register
+;======================================================
+&regval=Register(R0)
