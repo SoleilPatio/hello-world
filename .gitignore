@@ -27,3 +27,6 @@ modules.order
 __pycache__
 *.pyc
 /bin/
+
+#[cmake]
+build*/
