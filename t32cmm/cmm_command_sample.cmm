@@ -1,0 +1,47 @@
+;======================================================
+; useful document
+;======================================================
+;reference card:				https://www.lauterbach.com/reference_card_web.pdf
+;general function reference:	http://www2.lauterbach.com/pdf/general_func.pdf
+;general command reference:		http://www2.lauterbach.com/pdf/general_ref_v.pdf
+
+
+;======================================================
+; read register, binary operation , write back
+;======================================================
+;unlock TCM & reset EB
+;D.S SD:0x0c560000 %LE %LONG 0x1F000001;
+
+&regval=Data.Long(SD:0x0c560000)
+print "&regval"
+&regval=&regval&~(0x1<<3)|(0x1)
+print "&regval"
+D.S SD:0x0c560000 %LE %LONG &regval;
+
+;======================================================
+; read CPU register
+;======================================================
+&regval=Register(R0)
+
+
+;======================================================
+;function call 版本
+;======================================================
+;R.S R0 0x10
+;R.S R1 0x20
+;R.S R2 0x30
+
+GoSub UpdateReg R0
+GoSub UpdateReg R1
+GoSub UpdateReg R2
+
+Stop
+
+UpdateReg:
+Entry &reg
+Local &Temp
+&Temp=Register(&reg)
+&Temp=&Temp|0x1
+Register.Set &reg &Temp
+Return
+

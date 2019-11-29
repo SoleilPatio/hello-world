@@ -6,6 +6,7 @@
 .ipynb_checkpoints
 .settings
 output_*
+build*
 
 #[cscope symbol]
 cscope.*
