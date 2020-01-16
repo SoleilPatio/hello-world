@@ -1,7 +1,7 @@
 /*
  * client.cpp
  *
- *  Created on: 2019¦~7¤ë1¤é
+ *  Created on: 2019ï¿½~7ï¿½ï¿½1ï¿½ï¿½
  *      Author: cloud
  */
 #define _WIN32_WINNT 0x501 /*[CLS]: for getaddrinfo() declaration*/
@@ -73,6 +73,9 @@ int __cdecl main(int argc, char **argv)
             WSACleanup();
             return 1;
         }
+
+        /*[CLS]*/
+        printf("[CLS] client connecting...\n")
 
         // Connect to server.
         iResult = connect( ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);

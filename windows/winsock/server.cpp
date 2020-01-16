@@ -1,7 +1,7 @@
 /*
  * server.cpp
  *
- *  Created on: 2019¦~7¤ë1¤é
+ *  Created on: 2019ï¿½~7ï¿½ï¿½1ï¿½ï¿½
  *      Author: cloud
  */
 #define _WIN32_WINNT 0x501 /*[CLS]: for getaddrinfo() declaration*/
@@ -80,6 +80,9 @@ int __cdecl main(void)
 
     freeaddrinfo(result);
 
+    /*[CLS]*/
+    printf("[CLS] server listening...\n")
+
     iResult = listen(ListenSocket, SOMAXCONN);
     if (iResult == SOCKET_ERROR) {
         printf("listen failed with error: %d\n", WSAGetLastError());
@@ -87,6 +90,9 @@ int __cdecl main(void)
         WSACleanup();
         return 1;
     }
+
+    /*[CLS]*/
+    printf("[CLS] server accept...\n")
 
     // Accept a client socket
     ClientSocket = accept(ListenSocket, NULL, NULL);
