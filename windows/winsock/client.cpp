@@ -75,7 +75,7 @@ int __cdecl main(int argc, char **argv)
         }
 
         /*[CLS]*/
-        printf("[CLS] client connecting...\n")
+        printf("[CLS] client connecting...\n");
 
         // Connect to server.
         iResult = connect( ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);

@@ -81,7 +81,7 @@ int __cdecl main(void)
     freeaddrinfo(result);
 
     /*[CLS]*/
-    printf("[CLS] server listening...\n")
+    printf("[CLS] server listening...\n");
 
     iResult = listen(ListenSocket, SOMAXCONN);
     if (iResult == SOCKET_ERROR) {
@@ -92,7 +92,7 @@ int __cdecl main(void)
     }
 
     /*[CLS]*/
-    printf("[CLS] server accept...\n")
+    printf("[CLS] server accept...\n");
 
     // Accept a client socket
     ClientSocket = accept(ListenSocket, NULL, NULL);
