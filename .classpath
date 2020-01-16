@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="java/Inherit"/>
+	<classpathentry kind="src" path="java/Jackson/src/main/java"/>
+	<classpathentry kind="src" path="java/Jackson/src/test/java"/>
+	<classpathentry kind="src" path="java/JavaHttp"/>
+	<classpathentry kind="src" path="java/JavaJdbcHello/src"/>
+	<classpathentry kind="src" path="java/JavaTest/src/main/java"/>
+	<classpathentry kind="src" path="java/JavaTest/src/test/java"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
