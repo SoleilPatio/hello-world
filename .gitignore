@@ -8,6 +8,9 @@
 output_*
 build*
 
+#[vscode]
+.vscode/
+
 #[cscope symbol]
 cscope.*
 tags
