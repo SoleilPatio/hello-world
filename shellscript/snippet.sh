@@ -29,6 +29,8 @@ function_test()
 
 function_test arg1 arg2
 #---------------------- [network check port]
+#[CLS]: check with "netstat -tulpn | grep LISTEN"
+#[CLS]: check with "lsof -i -P -n | grep LISTEN"
 (echo > /dev/tcp/localhost/20) > /dev/null 2>&1
 result=$?
 echo "resutl=$result"
