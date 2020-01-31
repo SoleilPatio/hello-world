@@ -1,4 +1,7 @@
-#!/bin/bash
+#!bash
+
+#use under normal linux environment
+#!/bin/bash 
 
 #----------------------
 for i in {a..c}; do echo $(printf "%s %d" "$i" "''$i"); done
