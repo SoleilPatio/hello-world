@@ -151,6 +151,7 @@ void WriteToPipe(void)
  
    for (;;) 
    { 
+      /*[CLS]:block 這裏無窮迴圈*/
       bSuccess = ReadFile(g_hInputFile, chBuf, BUFSIZE, &dwRead, NULL);
       if ( ! bSuccess || dwRead == 0 ) break; 
       

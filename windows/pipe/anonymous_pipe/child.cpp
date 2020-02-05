@@ -18,6 +18,7 @@ int main(void)
       ) 
       ExitProcess(1); 
  
+   /*[CLS]: printf也會一起送過去，但是因爲buffer的關係，會比較慢，flush的時候才送出去*/
    // Send something to this process's stdout using printf.
    printf("\n ** This is a message from the child process. ** \n");
 
