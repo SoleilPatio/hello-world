@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+#[CLS]: "coding utf-8" 要在前兩行，py檔案裏面才可以出現 Non-ASCII character
+
+
+#[CLS]:pip install chardet 
 import chardet
 
 

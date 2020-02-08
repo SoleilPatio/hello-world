@@ -2,6 +2,8 @@
 
 """
 [CLS]:
+    Python UNICODE howto: https://docs.python.org/2.7/howto/unicode.html
+[CLS]:
     hint:
         str : 是encoded 的
         unicode: 是沒有encoded的(所有decode出來的都是unicode)
