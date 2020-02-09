@@ -51,7 +51,10 @@ void StrTest(char *str, int count)
         1.只要注意不要把utf-8 encoded string,傳進去api裏面就好
         2.big-5給進去貌似核心會處理，成功
         3.wchar unicode傳給_wfopen版本，成功
+
     Linux 是UTF-8核心，linux command shell傳進來的是utf-8編碼
+        1.linux fopen api直接傳進utf-8就可以成功
+        2.linux 不需要 _wfopen()
 */
 
 int main(int argc, char *argv[], char *envp[])

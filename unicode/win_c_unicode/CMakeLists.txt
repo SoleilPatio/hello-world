@@ -10,6 +10,8 @@ project (win_c_unicode)
 
 
 add_executable(print_test.exe print_test.cpp)
+add_executable(fopen_test.exe fopen_test.cpp)
+
 add_executable(main.exe main.cpp)
 add_executable(wmain.exe wmain.cpp)
 target_link_options(wmain.exe PUBLIC -municode) #[CLS]: -municode  : for mingw unicode support
