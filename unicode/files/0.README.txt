@@ -1,0 +1,47 @@
+[UNICODE]:
+[ 正 ] [ 能 ] [ 量 ] ==>[ u'\u6b63' ] [ u'\u80fd' ] [ u'\u91cf' ]
+ a b c ==> 61 62 63
+
+[UTF-8]:
+正	E6ADA3	
+能	E883BD
+量	E9878F
+
+
+[BIG-5]:
+正	A5BF
+能	AFE0
+量	B671
+
+
+chcp 65001  (UTF-8)
+chcp 950    (big-5)
+
+
+ansi.txt/big-5.txt:
+    這兩種完全一樣，就是兩個byte組成一個中文,big5沒有encode的意思,如果不事先講不會知道是big5。
+    big5是一種character set,跟unicode一樣。
+    vccode default會用utf-8打開，所以看起來會是亂碼
+
+ucs-2 le bom.txt：
+    windows 內定？
+    檔案開頭會多兩個byte: FF FE
+    接下來不管什麼字，都是兩個byte一組，可以看到unicode明碼
+    FF FE : ZERO WIDTH NO-BREAK SPACE => bom
+
+utf-8.txt:
+    不需要開頭bom
+    中文不一定2個byte,"正能量"每個字各佔3個byte
+    正	E6ADA3	
+    能	E883BD
+    量	E9878F
+    abc 還是只佔1個byte
+
+其他:
+    因爲dos 內定big-5 character set
+    dos 下 cat utf8 OK, 其他不行
+    dos 下 type big-5/ucs-2 OK, utf-8不行
+     
+
+
+    
