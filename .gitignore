@@ -1,6 +1,7 @@
 *.swp
 *.tmp
 *.class
+*.exe
 .pydevproject
 .project
 .ipynb_checkpoints
@@ -11,6 +12,7 @@ build*
 
 #[vscode]
 .vscode/
+tempCodeRunnerFile*
 
 #[cscope symbol]
 cscope.*
