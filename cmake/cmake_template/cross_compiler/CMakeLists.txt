@@ -2,6 +2,13 @@ cmake_minimum_required (VERSION 3.5)
 
 project (main_app)
 
+#[CLS]: avoid using -rdynamic
+# set(CMAKE_SYSTEM_NAME "Generic" CACHE STRING "Target system." FORCE)
+
+#[CLS]:assign toolchain
+set(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc CACHE FILEPATH "cross compiler" FORCE)
+set(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc CACHE FILEPATH "cross compiler" FORCE)
+
 
 #[CLS][Case1]:	source build
 #		"source build" must before "lib build",or "redefine target" will happen
@@ -19,6 +26,9 @@ project (main_app)
 ###include_directories(${SDK_HOME}/include) #no need to set include path.
 
 
+#[CLS] set or unset
+set(EXE_EXT ".exe")
+
 
 #link_libraries(rtos)
-add_executable(main_app ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
+add_executable(main_app${EXE_EXT} ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
