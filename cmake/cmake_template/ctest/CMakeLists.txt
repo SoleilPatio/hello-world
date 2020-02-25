@@ -21,7 +21,7 @@ project (main_app)
 #Enable testing for current directory and below.
 enable_testing()
 
-
+include(Dart)                       #[CLS] 產生 DartConfiguration.tcl (cmake configure的時候產生)
 #link_libraries(rtos)
 
 add_executable(test1 ${CMAKE_CURRENT_SOURCE_DIR}/test1.c)
