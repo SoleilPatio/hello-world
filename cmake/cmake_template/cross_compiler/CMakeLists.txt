@@ -1,13 +1,18 @@
 cmake_minimum_required (VERSION 3.5)
 
-project (main_app)
 
 #[CLS]: avoid using -rdynamic
 # set(CMAKE_SYSTEM_NAME "Generic" CACHE STRING "Target system." FORCE)
 
-#[CLS]:assign toolchain
+#[CLS]: assign toolchain
+#       BETTER place before project() for unknown reason
 set(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc CACHE FILEPATH "cross compiler" FORCE)
-set(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc CACHE FILEPATH "cross compiler" FORCE)
+set(CMAKE_CXX_COMPILER x86_64-w64-mingw32-c++ CACHE FILEPATH "cross compiler" FORCE)
+
+
+
+project (main_app)
+
 
 
 #[CLS][Case1]:	source build
