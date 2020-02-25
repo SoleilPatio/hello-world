@@ -24,9 +24,9 @@ int _tmain(int argc, TCHAR *argv[])
    printf("\n->Start of parent execution.\n");
 
 // Set the bInheritHandle flag so pipe handles are inherited. 
- 
+   ZeroMemory( &saAttr, sizeof(SECURITY_ATTRIBUTES) );
    saAttr.nLength = sizeof(SECURITY_ATTRIBUTES); 
-   saAttr.bInheritHandle = TRUE; 
+   saAttr.bInheritHandle = TRUE;          //[CLS]:一定要繼承，不然subprocess無法使用這個handle
    saAttr.lpSecurityDescriptor = NULL; 
 
 // Create a pipe for the child process's STDOUT. 
@@ -151,7 +151,7 @@ void WriteToPipe(void)
  
    for (;;) 
    { 
-      /*[CLS]:block 這裏無窮迴圈*/
+      /*[CLS]:這裏會block住，如果沒有資料*/
       bSuccess = ReadFile(g_hInputFile, chBuf, BUFSIZE, &dwRead, NULL);
       if ( ! bSuccess || dwRead == 0 ) break; 
       
@@ -161,7 +161,7 @@ void WriteToPipe(void)
  
 // Close the pipe handle so the child process stops reading. 
  
-   if ( ! CloseHandle(g_hChildStd_IN_Wr) ) 
+   if ( ! CloseHandle(g_hChildStd_IN_Wr) )   //[CLS]:這邊關掉handle會造成child 讀取中斷，失敗離開程式
       ErrorExit(TEXT("StdInWr CloseHandle")); 
 } 
  
