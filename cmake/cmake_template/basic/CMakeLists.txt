@@ -22,3 +22,12 @@ project (main_app)
 
 #link_libraries(rtos)
 add_executable(main_app ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
+
+#[CLS] compiler option
+# add_compile_options(-std=c++11)
+
+
+#[CLS] link option
+# add_link_options(-static)
+# target_link_options(main_app -static)
+# target_link_libraries(main_app -static)
