@@ -9,6 +9,8 @@
 output_*
 build*
 
+#LFK
+*_MTK/
 
 #[vscode]
 .vscode/
