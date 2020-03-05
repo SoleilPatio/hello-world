@@ -1,5 +1,6 @@
 #[CLS]: 加了這一行會正常
-# cmake_minimum_required(VERSION 3.10)
+# cmake_minimum_required(VERSION 3.10) #[CLS]: 比較合邏輯
+# cmake_minimum_required(VERSION 3.3)  #[CLS]: 舊的不合邏輯
 
 if(1)
     message("==>if: (1) ---> OK!")
