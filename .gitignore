@@ -15,6 +15,7 @@ build*
 #[vscode]
 .vscode/
 tempCodeRunnerFile*
+.favorites.json
 
 #[cscope symbol]
 cscope.*
@@ -39,3 +40,4 @@ __pycache__
 
 #[cmake]
 build*/
+
