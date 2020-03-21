@@ -3,7 +3,8 @@ from __future__ import print_function
 import httplib2
 import os
 
-from apiclient import discovery
+"""pip install --upgrade google-api-python-client"""
+from apiclient import discovery  
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
@@ -18,7 +19,8 @@ except ImportError:
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 # CLIENT_SECRET_FILE = 'client_secret.json'
-CLIENT_SECRET_FILE = ur'D:\\Users\clouds\Documents\MyDOC\Google 雲端硬碟\MyPrivy\憑證\Google-API\client_id(hello-world-google-api-client).json'
+# CLIENT_SECRET_FILE = ur'D:\\Users\clouds\Documents\MyDOC\Google 雲端硬碟\MyPrivy\憑證\Google-API\client_id(hello-world-google-api-client).json'
+CLIENT_SECRET_FILE = ur'C:\\APN\\USERS\\clouds\\Google 雲端硬碟\\MyPrivy\\憑證\\Google-API\\client_id(hello-world-google-api-client).json'
 # CLIENT_SECRET_FILE=r"D:\client_id.json"
 APPLICATION_NAME = 'Google Sheets API Python Quickstart'
 
@@ -59,7 +61,7 @@ def main():
     students in a sample spreadsheet:
     https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
     """
-    credentials = get_credentials()
+    credentials = get_credentials() #[CLS]: 打開網頁取得googles授權
     http = credentials.authorize(httplib2.Http())
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
                     'version=v4')
