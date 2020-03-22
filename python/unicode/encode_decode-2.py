@@ -3,7 +3,7 @@
 
 
 #[CLS]: 
-#  1. u" " or U" " 是 Unicode literals 
+#  1. u" " or U" " 是 Unicode literals (r" 是不轉義的意思)
 #  2. Unicode literals : 是unicode raw data, 沒有encode過，所以是無法顯示的。直接print s 是不行的
 #  3. 要encode過，才能顯示.(utf-8)
 #  4. 要跟console一樣的encode,才能在console show出來

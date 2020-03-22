@@ -4,7 +4,9 @@ import httplib2
 import os
 
 
-from apiclient import discovery     #[CLS]: 假如有問題,執行: pip install --upgrade google-api-python-client
+# from apiclient import discovery       #[CLS]: 假如有問題,執行: pip install --upgrade google-api-python-client
+from googleapiclient import discovery   #[CLS]: 再不行用這一行(所以變位置了?)
+
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
