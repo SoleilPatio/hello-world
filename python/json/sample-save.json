@@ -1,0 +1,161 @@
+{
+    "spreadsheetId": "1i0Mr9BCpGDVyScA808_nTz70nM-oSo-T7gmBSxqFL-E", 
+    "properties": {
+        "title": "InvestSim-daily_track", 
+        "locale": "zh_TW", 
+        "autoRecalc": "ON_CHANGE", 
+        "spreadsheetTheme": {
+            "themeColors": [
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 0.015686275, 
+                            "green": 0.7372549, 
+                            "red": 0.9843137
+                        }
+                    }, 
+                    "colorType": "ACCENT3"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 0.003921569, 
+                            "green": 0.42745098, 
+                            "red": 1
+                        }
+                    }, 
+                    "colorType": "ACCENT5"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 0.95686275, 
+                            "green": 0.52156866, 
+                            "red": 0.25882354
+                        }
+                    }, 
+                    "colorType": "ACCENT1"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {}
+                    }, 
+                    "colorType": "TEXT"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 0.20784314, 
+                            "green": 0.2627451, 
+                            "red": 0.91764706
+                        }
+                    }, 
+                    "colorType": "ACCENT2"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 0.8, 
+                            "green": 0.33333334, 
+                            "red": 0.06666667
+                        }
+                    }, 
+                    "colorType": "LINK"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 1, 
+                            "green": 1, 
+                            "red": 1
+                        }
+                    }, 
+                    "colorType": "BACKGROUND"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 0.3254902, 
+                            "green": 0.65882355, 
+                            "red": 0.20392157
+                        }
+                    }, 
+                    "colorType": "ACCENT4"
+                }, 
+                {
+                    "color": {
+                        "rgbColor": {
+                            "blue": 0.7764706, 
+                            "green": 0.7411765, 
+                            "red": 0.27450982
+                        }
+                    }, 
+                    "colorType": "ACCENT6"
+                }
+            ], 
+            "primaryFontFamily": "Arial"
+        }, 
+        "defaultFormat": {
+            "padding": {
+                "top": 2, 
+                "right": 3, 
+                "bottom": 2, 
+                "left": 3
+            }, 
+            "backgroundColorStyle": {
+                "rgbColor": {
+                    "blue": 1, 
+                    "green": 1, 
+                    "red": 1
+                }
+            }, 
+            "verticalAlignment": "BOTTOM", 
+            "backgroundColor": {
+                "blue": 1, 
+                "green": 1, 
+                "red": 1
+            }, 
+            "textFormat": {
+                "foregroundColor": {}, 
+                "bold": false, 
+                "foregroundColorStyle": {
+                    "rgbColor": {}
+                }, 
+                "strikethrough": false, 
+                "fontFamily": "arial,sans,sans-serif", 
+                "fontSize": 10, 
+                "italic": false, 
+                "underline": false
+            }, 
+            "wrapStrategy": "OVERFLOW_CELL"
+        }, 
+        "timeZone": "Asia/Taipei"
+    }, 
+    "sheets": [
+        {
+            "properties": {
+                "sheetType": "GRID", 
+                "index": 0, 
+                "title": "XINA50", 
+                "sheetId": 0, 
+                "gridProperties": {
+                    "columnCount": 26, 
+                    "rowCount": 1000
+                }
+            }
+        }, 
+        {
+            "properties": {
+                "sheetType": "GRID", 
+                "index": 1, 
+                "title": "2454", 
+                "sheetId": 693444493, 
+                "gridProperties": {
+                    "columnCount": 26, 
+                    "rowCount": 1000
+                }
+            }
+        }
+    ], 
+    "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/1i0Mr9BCpGDVyScA808_nTz70nM-oSo-T7gmBSxqFL-E/edit"
+}
