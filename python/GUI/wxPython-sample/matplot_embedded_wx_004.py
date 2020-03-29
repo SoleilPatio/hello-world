@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from matplotlib.backends.backend_wxagg import (
     FigureCanvasWxAgg as FigureCanvas,
     NavigationToolbar2WxAgg as NavigationToolbar,
@@ -17,7 +19,8 @@ class MyNavigationToolbar(NavigationToolbar):
         # We use a stock wx bitmap, but you could also use your own image file.
         bmp = wx.ArtProvider.GetBitmap(wx.ART_CROSS_MARK, wx.ART_TOOLBAR)
         tool = self.AddTool(wx.ID_ANY, 'Click me', bmp,
-                            'Activate custom contol')
+                            'Activate custom contol')       #[CLS]: mapplot 的 NavigationToolbar 提供AddTool(),
+                                                            #       讓你可以在原來的toolbar,新增wx的Button物件
         self.Bind(wx.EVT_TOOL, self._on_custom, id=tool.GetId())
 
     def _on_custom(self, evt):

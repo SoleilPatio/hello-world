@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import matplotlib
 import matplotlib.cm as cm
 import matplotlib.cbook as cbook
@@ -67,7 +69,7 @@ class PlotPanel(wx.Panel):
             ymax_i = z.shape[0] - ymax_i
         self.lines[0].set_data(xmax_i, ymax_i)
 
-        self.canvas.draw()
+        self.canvas.draw()      #[CLS] GUI Event來的時候，呼叫轉換過後的Canvas的draw() function來 update matplot內容
 
 
 class MyApp(wx.App):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from matplotlib.backends.backend_wx import NavigationToolbar2Wx as NavigationToolbar
 from matplotlib.figure import Figure
@@ -13,13 +14,13 @@ class CanvasFrame(wx.Frame):
         wx.Frame.__init__(self, None, -1,
                           'CanvasFrame', size=(550, 350))
 
-        self.figure = Figure()
+        self.figure = Figure()                              #[CLS]: matplot figure 相當於畫布canvas(上面可以畫多個圖表(座標軸))
         self.axes = self.figure.add_subplot(111)
         t = np.arange(0.0, 3.0, 0.01)
         s = np.sin(2 * np.pi * t)
 
         self.axes.plot(t, s)
-        self.canvas = FigureCanvas(self, -1, self.figure)
+        self.canvas = FigureCanvas(self, -1, self.figure)   #[CLS]: 將figure轉成GUI的canvas物件
 
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.sizer.Add(self.canvas, 1, wx.LEFT | wx.TOP | wx.EXPAND)
