@@ -324,6 +324,9 @@ class MyFrame(matplotlib_GUI.MyFrame):
 
         delete = self.checkbox_pick_delete.GetValue()
 
+        #[CLS] : all visible elements in a figure are subclasses of Artist.(mapplotlib)
+        #        reference: https://matplotlib.org/api/artist_api.html
+        #        可用artist.remove()來殺掉一條線
         artist = event.artist
 
         s = ""
