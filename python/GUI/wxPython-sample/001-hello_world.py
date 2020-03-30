@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
+#[CLS] Windos OS: pip install -U wxPython
+#[CLS] Linux OS:
+#       lsb_release -a ==> check ubuntu version
+#       pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
+
 # First things, first. Import the wxPython package.
-import wx  #[CLS]: pip install -U wxPython
+import wx
 
 
 print("WX version = ", wx.version())    #[CLS] check wx version
