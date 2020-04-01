@@ -19,7 +19,7 @@ project (main_app)
 ###include_directories(${SDK_HOME}/include) #no need to set include path.
 
 #Enable testing for current directory and below.
-enable_testing()
+enable_testing() #[CLS] 或者用option(BUILD_TESTING "" OFF)
 
 include(Dart)                       #[CLS] 產生 DartConfiguration.tcl (cmake configure的時候產生)
 #link_libraries(rtos)
@@ -34,3 +34,6 @@ add_test( test2  test2)             #[CLS] 這種寫法會造成CTestTestfile.cm
 
 #Add sub directory
 add_subdirectory(sub_src)
+
+#[CLS] print "ctest" command
+message("CMAKE_CTEST_COMMAND=" ${CMAKE_CTEST_COMMAND})
