@@ -15,7 +15,7 @@ build*
 #[vscode]
 .vscode/
 tempCodeRunnerFile*
-.favorites.json
+.favorites*.json
 
 #[cscope symbol]
 cscope.*
