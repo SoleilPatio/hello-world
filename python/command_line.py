@@ -8,6 +8,10 @@ popen2.* --abandon
 commands.* --abandon in 3.x
 """
 
+"""
+1. commands spaws a shell which does the glob expansion.  subprocess doesn't spawn a shell unless you pass shell = True.
+2. Subprocess gives you much more control over what's going on.
+"""
 
 def commands_test():
     import commands
