@@ -1,3 +1,7 @@
+import sys
+import pathlib
+import importlib
+
 def LoadPythonModule( python_src_file ):
     py_src = pathlib.Path(python_src_file)
     sys.path.append(str(py_src.parent))    #add module directory to  path
