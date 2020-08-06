@@ -17,7 +17,10 @@ def StrObj(obj):
     #Python 2
     # return json.dumps(obj, indent=4 , sort_keys=True).decode('unicode-escape').encode('utf-8')
     #Python 3
-    return json.dumps(obj, indent=4 , sort_keys=True, ensure_ascii=False ) #ensure_ascii=false for non-ascii character
+    try:
+        return json.dumps(obj, indent=4 , sort_keys=True, ensure_ascii=False ) #ensure_ascii=false for non-ascii character
+    except:
+        return json.dumps(vars(obj), indent=4 , sort_keys=True, ensure_ascii=False, default=lamba o: f"<<non-serializable: {type(o).__qualname__}>>" ) #ensure_ascii=false for non-ascii character
 
 def SaveToJsonFile(obj, json_file_name):
     pathlib.Path(json_file_name).parent.mkdir(parents=True, exist_ok=True)
