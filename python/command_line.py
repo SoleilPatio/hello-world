@@ -8,6 +8,10 @@ popen2.* --abandon
 commands.* --abandon in 3.x
 """
 
+"""
+1. commands spaws a shell which does the glob expansion.  subprocess doesn't spawn a shell unless you pass shell = True.
+2. Subprocess gives you much more control over what's going on.
+"""
 
 def commands_test():
     import commands
@@ -53,6 +57,42 @@ def subprocess_pipe():
     print "stdout=",stdout
     print "stderr=",stderr
 
+
+def Run_CMD( command_line, feature_context ):
+    #........................................................
+    # Console encoding issue
+    #........................................................
+    default_console_encoding="big5" #for most .bat output
+
+    #........................................................
+    # Execute command line
+    #........................................................
+    cmd_str = command_line
+    # print("[CMD] %s"%cmd_str)
+    logging.info("[CMD] %s"%cmd_str)
+    output = subprocess.Popen( cmd_str, shell = True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    std_out, std_err = output.communicate()
+
+    #........................................................
+    # (Option) Auto Detect Console encoding (not 100%)
+    #........................................................
+    # import chardet
+    # encoding = chardet.detect(std_out)
+    # print("encoding=", encoding)
+    # default_console_encoding = encoding["encoding"]
+
+    feature_context["stdout"] = std_out.decode(encoding=default_console_encoding).splitlines() #it's byte object
+    feature_context["stderr"] = std_err.decode(encoding=default_console_encoding).splitlines() #it's byte object
+
+    msg = "[CMD stdout] out=[\n%s\n]"%(std_out.decode(encoding=default_console_encoding)) #std_err is byte type
+    logging.info(msg)
+
+    if output.returncode != 0:
+        # msg = "[CMD stderr] ret=%s cmd=%s err=[\n%s\n]"%(output.returncode, cmd_str, std_err.decode()) #std_err is byte type
+        msg = "[CMD stderr] ret=%s err=[\n%s\n]"%(output.returncode, std_err.decode(encoding=default_console_encoding)) #std_err is byte type
+        logging.error(msg)
+        print("[ERROR] %s"%msg)
+    return output.returncode
 
 
 if __name__ == '__main__':
