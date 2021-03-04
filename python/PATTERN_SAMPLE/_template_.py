@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
+import sys
+import os
 import argparse
 
 try:
@@ -12,6 +14,10 @@ except:
     # for Python3
     import tkinter as tk
     from tkinter import ttk
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
+import libpython.core as core
+import libpython.File.FileInfo as fileinfo
 
 
 
