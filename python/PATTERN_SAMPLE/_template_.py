@@ -5,6 +5,7 @@ from __future__ import print_function
 import sys
 import os
 import argparse
+import textwrap
 
 try:
     # for Python2
@@ -29,8 +30,15 @@ if __name__ == "__main__":
     
     """
     [CLS]: Normal Usage
+            1. can pass only null arguments
     """
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog='XBMC Music Video Manager',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=textwrap.dedent('''\
+            additional information:
+                1. file name ends with "- [no_nfo]" will be ignored.
+            '''))
 
 
     """
