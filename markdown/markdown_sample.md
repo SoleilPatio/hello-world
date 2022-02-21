@@ -34,7 +34,7 @@ This is an H2
 * Link 1: URL
     * Here is the link [Google](https://www.google.com/ "Title")
 * Link 2: local file
-    * [Local](./another_link_file.md "file title")
+    * [Local](./_another_link_file.md "file title")
         - file path cannot have space?
 * Link 3: Tag (case-insesnsitive)
     * [Google][tag_id] ID is unique, and cas-insensitive
